@@ -71,6 +71,31 @@
     </div>
 </body>
 <script>
+    //判断系统类型
+function OSnow(){
+    var agent = navigator.userAgent.toLowerCase();
+    var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
+    let box=document.querySelector(".prompt-box .prompt");
+    let promot="0";
+    if (agent.indexOf("win32") >= 0 || agent.indexOf("wow32") >= 0) {
+        //your code
+         promot="F11";
+        //alert("这是windows32位系统");
+    }
+    if (agent.indexOf("win64") >= 0 || agent.indexOf("wow64") >= 0) {
+        //your code
+         promot="F11";
+       // alert("这是windows64位系统");
+    }
+    if(isMac){
+         promot="shift+command+f";
+        //your code
+        //alert("这是mac系统");
+    }
+    console.log(box);
+    box.innerHTML="键盘输入"+promot+"全屏显示";
+}
+OSnow();
     (function(){
         setTimeout(()=>{   
             let prompt=document.querySelector(".prompt-box");
