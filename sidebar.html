@@ -72,8 +72,7 @@
 </body>
 <script>
     (function(){
-        setTimeout(()=>{
-            
+        setTimeout(()=>{   
             let prompt=document.querySelector(".prompt-box");
             prompt.classList.add('box-load-in');
             setTimeout(()=>{
@@ -98,9 +97,10 @@
             now_page.classList.remove('page-in');
             now_page.classList.add('page-out');
             setTimeout((num)=>{
-                now_page.classList.remove('page-out');
+                //now_page.classList.remove('page-out');
                 now_page.classList.add('page-in');
-                //now_page.classList.remove('page-in');
+               
+                
                 document.querySelector('iframe').src=page[num];
             },300,num);
             //alert(times)
