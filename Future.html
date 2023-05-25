@@ -52,14 +52,8 @@
               </div>
         </div>
     </div>
-   <script src="./js/swiper-bundle.min.js"></script>
-   <script>
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 2.5,
-      spaceBetween: 38,
-      freeMode: true,
-    });
-</script>
+   
+   
 
     
 </body>
@@ -112,7 +106,7 @@
                         news.children[1].innerHTML=data[i].content;
                     }
                     else{
-                        let new_one=new_node;
+                        let new_one=new_node.cloneNode("1");
                         new_one.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
                         new_one.children[0].children[0].innerHTML=data[i].id;
                         new_one.children[1].innerHTML=data[i].content;
@@ -127,6 +121,15 @@
 
         
         })
+        
+    </script>
+    <script src="./js/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+          slidesPerView: 2.2,
+          spaceBetween: 38,
+          freeMode: true,
+        });
     </script>
 </html>
 
