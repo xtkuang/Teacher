@@ -77,31 +77,31 @@
 
                 <div class="swiper mySwiper" id="swiper1">
                     <div class="swiper-wrapper" >
-                        <div class="swiper-slide" index="1" >
+                        <div class="swiper-slide" index="1" flag="1">
                             <div class="img" ></div>
                         </div>
-                        <div class="swiper-slide " index="2">
+                        <div class="swiper-slide" index="2" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="3">
+                        <div class="swiper-slide" index="3" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="4">
+                        <div class="swiper-slide" index="4" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="5" >
+                        <div class="swiper-slide" index="5" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="6">
+                        <div class="swiper-slide" index="6" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="7">
+                        <div class="swiper-slide" index="7" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="8">
+                        <div class="swiper-slide" index="8" flag="0">
                             <div class="img"></div>
                         </div>
-                        <div class="swiper-slide" index="9">
+                        <div class="swiper-slide" index="9" flag="0">
                             <div class="img"></div>
                         </div>
                     </div>
@@ -414,26 +414,104 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script>
+    //预加载本地数据
+    //网评
+    textArrayLocal_comment=[]
+    urlArrayLocal_comment=[]
+    imgArrayLocal_comment=[]
+    imgUrlArrayLocal_comment=[]
+
+    textArray_comment=[]
+    urlArray_comment=[]
+    imgArray_comment=[]
+    imgUrlArray_comment=[]
+    //爆款新闻
+    textArrayLocal_news=[]
+    imgArrayLocal_news=[]
+    imgUrlArrayLocal_news=[]
+
+    textArray_news=[]
+    imgArray_news=[]
+    imgUrlArray_news=[]
+    //短视频
+    textArrayLocal_video=[]
+    imgArrayLocal_video=[]
+    imgUrlArrayLocal_video=[]
+
+    textArray_video=[]
+    imgArray_video=[]
+    imgUrlArray_video=[]
 
     //网评
+    // 从localStorage中获取存储的数据,网页初始加载local数据
+    function updateLocalComment(){
+        if(localStorage.getItem("commentResponse")!==null){
+            var commentData = JSON.parse(localStorage.getItem("commentResponse"));
+
+            for(let i=0;i<5;i++){
+
+                textArrayLocal_comment[i]=commentData[i].content
+                urlArrayLocal_comment[i]=commentData[i].url
+                imgUrlArrayLocal_comment[i]=commentData[i].picture
+                imgArrayLocal_comment[i]=commentData[i].picture_b64
+            }
+
+            for(let i=0;i<5;i++){
+                $("#swiper3 [pos="+i+"] label").html(textArrayLocal_comment[i])
+                $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArrayLocal_comment[i]).attr("href",urlArrayLocal_comment[i])
+                $("#swiper3 [pos="+i+"] +.img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal_comment[i]+"")
+            }
+            // let swiper3=$("#swiper3 .swiper-slide-active")
+            // let pos=swiper3.attr("pos")
+            // $(".boxtext span").html(textArrayLocal[fix])
+            // $(".name span").html(nameArrayLocal[fix])
+            // $(".major span").html(majorArrayLocal[fix])
+            // $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"")
+        }
+        else{
+            console.log("Local Comment无数据!");
+        }      
+    }
+
+    updateLocalComment()
+
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://118.25.189.240:5000/api/comment_theory', true);
     xhr.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr.onload = function() {
-        var response = xhr.response; // 获取服务器返回的数据
-        console.log(response);
-        textArray=[]
-        urlArray=[]
-        imgArray=[]
+        var commentResponse = xhr.response; // 获取服务器返回的数据
+        console.log(commentResponse);
+        // 存储数据到localStorage中
+        localStorage.setItem('commentResponse', JSON.stringify(commentResponse));
+        //当前的各项参数数值
         for(let i=0;i<5;i++){
-            textArray[i]=response[i].content
-            urlArray[i]=response[i].url
-            imgArray[i]=response[i].picture_b64
+            textArray_comment[i]=commentResponse[i].content
+            urlArray_comment[i]=commentResponse[i].url
+            imgUrlArray_comment[i]=commentResponse[i].picture
+            imgArray_comment[i]=commentResponse[i].picture_b64
         }
+        //当前的与local里的比较
         for(let i=0;i<5;i++){
-            $("#swiper3 [pos="+i+"] label").html(textArray[i])
-            $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArray[i]).attr("href",urlArray[i])
-            $("#swiper3 [pos="+i+"] +.img").css("background-image","url(data:image/jpeg;base64,"+imgArray[i]+"")
+            if(imgUrlArray_comment[i]!=imgUrlArrayLocal_comment[i]){
+                console.log("comment图片更新");
+                imgUrlArrayLocal_comment[i]=imgUrlArray_comment[i]
+                imgArrayLocal_comment[i]=imgArray_comment[i]
+
+                $("#swiper3 [pos="+i+"] +.img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal_comment[i]+"").hide().fadeIn()
+
+            }
+            if(textArray_comment[i]!=textArrayLocal_comment[i]){
+                console.log("comment文字更新");
+                textArrayLocal_comment[i]=textArray_comment[i]
+                $("#swiper3 [pos="+i+"] label").html(textArrayLocal_comment[i]).hide().fadeIn()
+
+            }
+            if(urlArray_comment[i]!=urlArrayLocal_comment[i]){
+                console.log("comment链接更新");
+                urlArrayLocal_comment[i]=urlArray_comment[i]
+                $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArrayLocal_comment[i]).attr("href",urlArrayLocal_comment[i]).hide().fadeIn()
+
+            }
         }
 
         // $('.abc').css("background-image","url(data:image/jpeg;base64,"+img+")")
@@ -442,54 +520,156 @@
     xhr.send()
 
     //爆款新闻
+    // 从localStorage中获取存储的数据,网页初始加载local数据
+    function updateLocalNews(){
+        if(localStorage.getItem("newsResponse")!==null){
+            var newsData = JSON.parse(localStorage.getItem("newsResponse"));
+            // console.log(newsData);
+            for(let i=0;i<6;i++){
+
+                textArrayLocal_news[i]=newsData[i].content
+                // urlArrayLocal_news[i]=newsData[i].url
+                imgUrlArrayLocal_news[i]=newsData[i].picture
+                imgArrayLocal_news[i]=newsData[i].picture_b64
+            }
+
+            for(let i=0;i<6;i++){
+                $("#swiper2 [pos="+i+"] label").html(textArrayLocal_news[i])
+                // $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArrayLocal_news[i]).attr("href",urlArrayLocal_news[i])
+                $("#swiper2 [pos="+i+"]").siblings().css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal_news[i]+"")
+            }
+            // let swiper3=$("#swiper3 .swiper-slide-active")
+            // let pos=swiper3.attr("pos")
+            // $(".boxtext span").html(textArrayLocal[fix])
+            // $(".name span").html(nameArrayLocal[fix])
+            // $(".major span").html(majorArrayLocal[fix])
+            // $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"")
+        }
+        else{
+            console.log("Local news无数据!");
+        }      
+    }
+
+    updateLocalNews()
+
+    //爆款新闻
     var xhr1 = new XMLHttpRequest();
     xhr1.open('GET', 'http://118.25.189.240:5000/api/news_theory', true);
     xhr1.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr1.onload = function() {
-        var response = xhr1.response; // 获取服务器返回的数据
-        console.log(response);
-        textArray=[]
-        // urlArray=[]
-        imgArray=[]
+        var newsResponse = xhr1.response; // 获取服务器返回的数据
+        // console.log("newsResponse");
+        console.log(newsResponse);
+        // console.log(1);
+        // 存储数据到localStorage中
+        localStorage.setItem('newsResponse', JSON.stringify(newsResponse));
+        //当前的各项参数数值
         for(let i=0;i<6;i++){
-            textArray[i]=response[i].content
-            // urlArray[i]=response[i].url
-            imgArray[i]=response[i].picture_b64
-            // console.log(imgArray[i]);
+            textArray_news[i]=newsResponse[i].content
+            // urlArray_news[i]=newsResponse[i].url
+            imgUrlArray_news[i]=newsResponse[i].picture
+            imgArray_news[i]=newsResponse[i].picture_b64
         }
+        //当前的与local里的比较
         for(let i=0;i<6;i++){
-            console.log($("#swiper2 [pos="+i+"]").siblings());
-            $("#swiper2 [pos="+i+"] label").html(textArray[i])
-            $("#swiper2 [pos="+i+"]").siblings().css("background-image","url(data:image/jpeg;base64,"+imgArray[i]+"")
-        }
+            if(imgUrlArray_news[i]!=imgUrlArrayLocal_news[i]){
+                console.log("news图片更新");
+                imgUrlArrayLocal_news[i]=imgUrlArray_news[i]
+                imgArrayLocal_news[i]=imgArray_news[i]
 
+                $("#swiper2 [pos="+i+"]").siblings().css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal_news[i]+"").hide().fadeIn()
+
+            }
+            if(textArray_news[i]!=textArrayLocal_news[i]){
+                console.log("news文字更新");
+                textArrayLocal_news[i]=textArray_news[i]
+                $("#swiper2 [pos="+i+"] label").html(textArrayLocal_comment[i]).hide().fadeIn()
+
+            }
+
+        }
         // $('.abc').css("background-image","url(data:image/jpeg;base64,"+img+")")
 
     };
     xhr1.send()
+
+    //短视频
+    // 从localStorage中获取存储的数据,网页初始加载local数据
+    function updateLocalVideo(){
+        if(localStorage.getItem("videoResponse")!==null){
+            var videoData = JSON.parse(localStorage.getItem("videoResponse"));
+            // console.log(2);
+            // console.log(videoData);
+            for(let i=0;i<9;i++){
+
+                textArrayLocal_video[i]=videoData[i].content
+                // urlArrayLocal_video[i]=videoData[i].url
+                imgUrlArrayLocal_video[i]=videoData[i].picture
+                imgArrayLocal_video[i]=videoData[i].picture_b64
+            }
+
+            for(let i=1;i<=9;i++){
+                // $("#swiper2 [pos="+i+"] label").html(textArrayLocal_video[i])
+                // $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArrayLocal_video[i]).attr("href",urlArrayLocal_video[i])
+                $("#swiper1 [index="+i+"] .img").css("background-image","linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(data:image/jpeg;base64,"+imgArrayLocal_video[i-1]+"")
+            }
+
+            let active=$("#swiper1 [flag=1]")
+            console.log(2);
+            console.log(active);
+            console.log(3);
+            let indexx=active.attr("index")-1
+            let intro=$(".intro")
+            console.log(intro);
+            console.log(textArrayLocal_video[indexx]);
+            intro.html(textArrayLocal_video[indexx])
+            
+        }
+        else{
+            console.log("Local video无数据!");
+        }      
+    }
+
+    updateLocalVideo()
     
-    textArray1=[]
-    dateArray1=[]
-    imgArray1=[]
     var xhr2 = new XMLHttpRequest();
     xhr2.open('GET', 'http://118.25.189.240:5000/api/video_theory', true);
     xhr2.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr2.onload = function() {
-        var response = xhr2.response; // 获取服务器返回的数据
-        console.log(response);
-
+        var videoResponse = xhr2.response; // 获取服务器返回的数据
+        console.log(videoResponse);
+        // 存储数据到localStorage中
+        localStorage.setItem('videoResponse', JSON.stringify(videoResponse));
+        //当前的各项参数数值
         for(let i=0;i<9;i++){
-            textArray1[i]=response[i].content
-            // dateArray[i]=response[i].url
-            imgArray1[i]=response[i].picture_b64
-            // console.log(imgArray[i]);
+            textArray_video[i]=videoResponse[i].content
+            // urlArray_video[i]=videoResponse[i].url
+            imgUrlArray_video[i]=videoResponse[i].picture
+            imgArray_video[i]=videoResponse[i].picture_b64
         }
+        //当前的与local里的比较
         for(let i=1;i<=9;i++){
-            // console.log($("#swiper1 [pos="+i+"]"))
-            $("#swiper1 [index="+i+"] .img").css("background","linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(data:image/jpeg;base64,"+imgArray1[i-1]+"")
+            if(imgUrlArray_video[i-1]!=imgUrlArrayLocal_video[i-1]){
+                console.log("video图片更新");
+                imgUrlArrayLocal_video[i-1]=imgUrlArray_video[i-1]
+                imgArrayLocal_video[i-1]=imgArray_video[i-1]
+
+                $("#swiper1 [index="+i+"] .img").css("background-image","linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(data:image/jpeg;base64,"+imgArrayLocal_video[i-1]+"").hide().fadeIn()
+
+            }
+
         }
-        console.log(textArray1[0]);
-        $(".intro").html(textArray1[0])
+
+        let active=$("#swiper1 [flag=1]")
+        index=active.attr("index")-1
+        let intro=$(".intro")
+        if(textArray_video[index]!=textArrayLocal_video[index]){
+            console.log("video文字更新");
+            textArrayLocal_video[index]=textArray_video[index]
+            intro.html(textArrayLocal_video[index]).hide().fadeIn();
+        }
+        // console.log(textArray1[0]);
+        // $(".intro").html(textArray1[0])
         // $('.abc').css("background-image","url(data:image/jpeg;base64,"+img+")")
 
     };
@@ -522,7 +702,11 @@
 
             }, 100);
 
-            let active=$(".swiper-slide-active")
+            let active=$("#swiper1 .swiper-slide-active")
+            $("#swiper1 .swiper-slide").each(function(){
+                $(this).attr("flag","0")
+            })
+            active.attr("flag","1")
             // textArray=[
             //         "    做宣传，得与时俱进。前些年，抖音、快手很火。近年视频号火了起来。<br>    对高校搞宣传的人来说，如果到现在还对视频号认识不清晰，必然会在新的宣传大潮中落伍。<br>    现在几乎所有单位、有追求的企业，都有官方微信号。这是常识，大家都接受。可知，再过半年，大家都会有视频号，而且常态经营视频号，作为自己对外宣传的重要窗口，半年后，这也是常识。而遗憾的是，现在不少单位、企业，对视频号大潮毫无感觉。视频号，将会是官微的b面。现在的官微还将存在并发挥重要作用，但它是文字版官微，而视频号是视频版官微，二者互相配合，共同构成对外宣传的窗口，而且视频号的地位作用只会越来越高、越大。<br>    5G时代，微信官号衍生出视频号。为什么视频号将会发生官微的作用？因为便于微信转发，视频号可以精心做出优质作品，展现风采和成绩。<br>    做视频号，要与做抖音快手有所区别。后者比较注重片段冲击力。视频号要有画面冲击力，但更注重逻辑性、叙事完成度，比较适合向上宣传，对展现自己形象实力尤为有利。<br>    视频号的时代已来，赶紧研究它的特性，常态制作、发布优质视频作品，现在来看，做外宣视频号将会是主力。<br>    ",
             //         "    相比抖音、快手，做视频号显然是另一个赛道。值得关注的是，一些985、211名校，在视频号上并没有多大优势，做的精美的视频，没有什么转、赞、留言，在视频号上，“名校效应”荡然无存。要知道，这些名校做抖音、快手时，动辄可是百万粉丝打底的。  <br>    在视频号上做出华丽外衣，但是基本没有激起涟漪的高校，有一个共同特点，就是视频号并非由高校新闻部门主导，很多是由学校广播电视台同学们做的。所以它们的共同处在于，画面精美，但是内涵匮乏，起初时订阅者还有兴趣看看精美画面，但接着都是雷同，谁愿一直看披着华丽外衣但内容苍白的东西？所以，这样的视频号，缺乏持续关注力。 <br>    高校视频号，应该由高校宣传部新闻人员主导。视频号，代表学校官方形象，应该在画面外在和表达内容上达到和谐。偏技术的人来搞视频号，容易搞成学校观光片，不是说观光片没用，而是一味的搞没有意义。懂新闻的人主导学校视频号，能在内容上更加丰满，尊重新闻规律，与时俱进，不断塑造订阅者的观看需求。要知道，新闻人员做的视频号，哪怕在技术上有所欠缺，但有内容，有变化，容易形成内容刚需，学校转赞留言的人会很多。<br>    视频号，本质上是宣传学校核心内涵的，代表着学校形象。目前高校视频号普遍最大问题是，认为要以画面取胜，所以不少是摄影人员主导，画面质量上来了，可是摄影人员懂新闻的有多少？导致内容匮乏苍白。视频号，交给懂新闻的人来做，唯如此，才能获得灵魂，形成稳定收看群体，形成可持续性。",
@@ -534,7 +718,7 @@
             //         "    高校自媒体，特别是官方视频号，可谓是学校的门面。每一条视频，都要确保有相当的水准。何谓水准？一般认为，叙事要有逻辑性。即先什么，后什么，都要讲得通，言之有理，体现出逻辑、秩序。<br>    既然要有逻辑性，那么就要精心构思，特别是体现出叙事的完整性。比如，某个学生热心助人，镜头语言上，事情经过怎么样，末尾要予以肯定。要么是别人口头肯定，要么是在视频字幕上加以点赞。这就是叙事的完整性。这样就保证了视频的“完整性”。<br>    然而，要做出有人气、点击量大、有相当感染力的短视频，光有“逻辑完整”还不够，还要有“爆点”。就是说，在设计上要有“传播效果上有爆发力的点”。比如某个动作细节，这个细节让人泪目。比如某句话是金句，从前后语境一看，觉得特别有道理或者有感染力。或者经过前面的铺垫，某个镜头正好是高潮，一下让人感动。有完整的叙事逻辑，是有了“面”，再加上有爆发力的点，那么爆款短视频呼之欲出。<br>    一般来说，短视频有完整逻辑，创作者已经满意，认为是好作品。可是，光有面还不够，一定要有爆点，要有调动人的思维和情感的“有爆发力的点”。后者是拉开爆款短视频和一般短视频的门槛。这需要精心策划，需要在镜头语言上“留下重重一笔”，需要有爆点思维。<br>    总之，短视频创作，要做出走心、让人爱看愿意传播的短视频，不能仅满足于“逻辑完整性”，还要有“爆点意识”。而显然，点大于面。",
             //         "    关于短视频创作，一个是要“看得懂”，再一个就是“让人爱看”。那么要让观众爱看，需要具备哪些元素呢？<br>    “爱看”，包括“看得懂”。当然了，看不懂，大多数人会果断“弃剧”。“爱看”一个重要的要求，是有节奏感。何为节奏感?可以是有点有面，或者说是“点面结合”。在画面调度上就是，有近处的“聚焦”，也有远镜头的“大场面大画面”。有些短视频高手喜欢炫技，动辄是无人机的远景“大片感”。须知，大片感一上来让人着迷，可是过了几秒缺乏变化也容易让人视觉疲倦。还是需要一些“近景聚焦”以刻画细节。<br>    所谓的节奏感，再就是要有起承转合。可以做些铺垫，前面是比较的平，但是平铺中要蓄力，做一些“交代细节，细节暗示，促进完整性”有助于“看懂”的工作。所有这一切，都是为了紧紧地抓紧观众的心，让其产生期待，直到高潮性画面的到来。当然在其过程中，配乐的卡点要跟上，高潮时配乐要跟上，千万不能拉胯。爆款视频无不如此，不管有多短，都要有高潮。高潮的出现，让观众感觉前面的花时间观看都是值得的。当然，高潮前的画面编排，也要谨守“爱看”原则，以细节取胜，否则观众根本没心思接着看直到高潮的出现。<br>别小瞧了短视频，它也是完整的艺术创作。就好比故事片、公益片，要有逻辑，有节奏感，它是一门艺术，小细节大场面穿插出现，起承转合直奔高潮，把握好了节奏感，观众自然愿意看完，高潮自然而然到来，爆款短视频应运而生。",
             //     ]
-            console.log(textArray1[0]);
+            // console.log(textArray1[0]);
 
             dateArray=[
                     "发布时间：2023-01-23",
@@ -550,10 +734,10 @@
 
             index=active.attr("index")-1
             let intro=$(".intro")
-            intro.html(textArray1[index]).hide().fadeIn();
+            intro.html(textArrayLocal_video[index]).hide().fadeIn();
             // intro.fadeIn()
-            let date=$(".date")
-            date.html(dateArray[index]).hide().fadeIn();
+            // let date=$(".date")
+            // date.html(dateArrayLo[index]).hide().fadeIn();
             },
         },
     });
