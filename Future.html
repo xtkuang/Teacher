@@ -49,7 +49,31 @@
                     </div>
                     <p class="scrollbar"></p>
                   </div>
-              </div>
+                </div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div>
+                          <h1></h1>
+                      </div>
+                      <p class="scrollbar"></p>
+                    </div>
+                  </div>
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div>
+                          <h1></h1>
+                      </div>
+                      <p class="scrollbar"></p>
+                    </div>
+                  </div>
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div>
+                          <h1></h1>
+                      </div>
+                      <p class="scrollbar"></p>
+                    </div>
+                  </div>
         </div>
     </div>
    
@@ -75,6 +99,7 @@
         }
         
     </script> -->
+    <script src="./js/swiper-bundle.min.js"></script>
     <script>
         $.ajax({
             type:"get",
@@ -95,8 +120,6 @@
                 let main=document.querySelector(".swiper-wrapper");
                 let news=document.querySelector(".swiper-slide");
                 let new_node=news.cloneNode("1");
-
-                
                 for(let i=0;i<data.length;i++){                   
                     if(!i){
                         console.log(news.children[0].style)
@@ -112,24 +135,20 @@
                         new_one.children[1].innerHTML=data[i].content;
                         main.append(new_one);
                     }
-                }
-
-
-
+                    
+                }   
                 
               }
-
-        
         })
         
     </script>
-    <script src="./js/swiper-bundle.min.js"></script>
+   
     <script>
         var swiper = new Swiper(".mySwiper", {
-          slidesPerView: 2.2,
-          spaceBetween: 38,
-          freeMode: true,
-        });
+            slidesPerView: 2.2,
+            spaceBetween: 38,
+            freeMode: true,
+          });
     </script>
 </html>
 
