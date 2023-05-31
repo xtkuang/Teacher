@@ -170,7 +170,7 @@ body{
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url(../img/photobig.png);
+    /* background-image: url(../img/photobig.png); */
     /* z-index: 500; */
 }
 

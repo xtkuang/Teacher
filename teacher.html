@@ -102,31 +102,104 @@
 </body>
 <script>
     //名师介绍
+    
+    //预加载本地数据
+    nameArrayLocal=[]
+    textArrayLocal=[]
+    majorArrayLocal=[]
+    imgArrayLocal=[]
+    imgUrlArrayLocal=[]
+
     nameArray=[]
     textArray=[]
     majorArray=[]
     imgArray=[]
+    imgUrlArray=[]
+    // 从localStorage中获取存储的数据,网页初始加载local数据
+    function updateLocalTeacher(){
+        if(localStorage.getItem("teacherResponse")!==null){
+            var teacherData = JSON.parse(localStorage.getItem("teacherResponse"));
+
+            for(let i=0;i<7;i++){
+                nameArrayLocal[i]=teacherData[i].name
+                textArrayLocal[i]=teacherData[i].intro
+                majorArrayLocal[i]=teacherData[i].title
+                imgUrlArrayLocal[i]=teacherData[i].picture
+                imgArrayLocal[i]=teacherData[i].picture_b64
+            }
+
+            for(let i=1;i<=7;i++){
+                $("[fix="+i+"] .photo").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[i-1]+"")
+            }
+            let teacher=$("[index='4']")
+            let fix=teacher.attr("fix")-1
+            $(".boxtext span").html(textArrayLocal[fix])
+            $(".name span").html(nameArrayLocal[fix])
+            $(".major span").html(majorArrayLocal[fix])
+            $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"")
+        }
+        else{
+            console.log("Local teacher无数据!");
+        }      
+    }
+
+    updateLocalTeacher()
+
+    
+    //请求后端数据
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://118.25.189.240:5000/api/teacher_intro', true);
     xhr.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr.onload = function() {
-        var response = xhr.response; // 获取服务器返回的数据
-        console.log(response);
+
+        var teacherResponse = xhr.response; // 获取服务器返回的数据
+        console.log(teacherResponse);
+        // 存储数据到localStorage中
+        localStorage.setItem('teacherResponse', JSON.stringify(teacherResponse));
 
         for(let i=0;i<7;i++){
-            nameArray[i]=response[i].name
-            textArray[i]=response[i].intro
-            majorArray[i]=response[i].title
-            imgArray[i]=response[i].picture_b64
-        }
-        for(let i=1;i<=7;i++){
-            $("[fix="+i+"] .photo").css("background-image","url(data:image/jpeg;base64,"+imgArray[i]+"")
+            nameArray[i]=teacherResponse[i].name
+            textArray[i]=teacherResponse[i].intro
+            majorArray[i]=teacherResponse[i].title
+            imgUrlArray[i]=teacherResponse[i].picture
+            imgArray[i]=teacherResponse[i].picture_b64
         }
 
-        $(".boxtext span").html(textArray[0])
-        $(".name span").html(nameArray[0])
-        $(".major span").html(majorArray[0])
-        $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArray[0]+"")
+        for(let i=1;i<=7;i++){
+            if(imgUrlArray[i-1]!=imgUrlArrayLocal[i-1]){
+                console.log("teacher图片更新");
+                // console.log(imgUrlArray[0]+imgUrlArrayLocal[0]);
+                imgUrlArrayLocal[i-1]=imgUrlArray[i-1]
+                imgArrayLocal[i-1]=imgArray[i-1]
+                $("[fix="+i+"] .photo").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[i-1]+"").hide().fadeIn()
+            }
+        }
+        let teacher=$("[index='4']")
+        let fix=teacher.attr("fix")-1
+        console.log(teacher.attr("fix"));
+        if(textArray[fix]!=textArrayLocal[fix]){
+            console.log("teacher文字更新");
+            textArrayLocal[fix]=textArray[fix]
+            $(".boxtext span").html(textArrayLocal[fix]).hide().fadeIn()
+        }
+        if(nameArray[fix]!=nameArrayLocal[fix]){
+            console.log("teacher名字更新");
+            console.log("teacher当前获取的:"+nameArray[fix]);
+            console.log("teacher local获取的:"+nameArrayLocal[fix]);
+            nameArrayLocal[fix]=nameArray[fix]
+            $(".name span").html(nameArrayLocal[fix]).hide().fadeIn()
+        }
+        if(majorArray[fix]!=majorArrayLocal[fix]){
+            console.log("teacher职称更新");
+            majorArrayLocal[fix]=majorArray[fix]
+            $(".major span").html(majorArrayLocal[fix]).hide().fadeIn()
+        }
+        if(imgUrlArray[fix]!=imgUrlArrayLocal[fix]){
+            console.log("teacher左上角photo更新");
+            imgUrlArrayLocal[fix]=imgUrlArray[fix]
+            imgArrayLocal[fix]=imgArray[fix]
+            $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"").hide().fadeIn()
+        }
 
     };
     xhr.send()
@@ -249,8 +322,9 @@
         let text=$('.boxtext span')
         let major=$(".major span")
 
-        name.text(nameArray[fix]).hide().fadeIn();
-        text.text(textArray[fix]).hide().fadeIn();
+
+        name.text(nameArrayLocal[fix]).hide().fadeIn();
+        text.text(textArrayLocal[fix]).hide().fadeIn();
         major.hide().fadeIn();
     }
 
