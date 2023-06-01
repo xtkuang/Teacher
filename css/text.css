@@ -87,7 +87,7 @@ body {
   height: 15.625vw;
 }
 .main-future .future-swiper {
-  height: 38.7019vh;
+  height: 43vh;
   background: #FFFFFF;
   background-color: #f3f8fd;
   border-radius: 0.7813vw;
@@ -99,6 +99,7 @@ body {
 }
 .swiper-slide {
   margin: 12px 0;
+  height: 90% !important;
   text-align: center;
   font-size: 18px;
   background: #fff;
