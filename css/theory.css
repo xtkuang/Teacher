@@ -586,7 +586,7 @@ ul{
     /* or 150% */
     color: #0A1629;
     justify-self: start;
-    text-indent: 2em;
+    /* text-indent: 2em; */
     white-space:break-spaces;
     overflow: auto;
     /* scrollbar-width: none; */
