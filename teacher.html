@@ -36,7 +36,6 @@
 
             <div class="boxin">
                 <div class="boxtext"><span>
-                         <!-- 杨志刚，主任记者，浙江教育报刊总社副社长、副总编，兼任浙江教育报主编，中国少儿报刊协会数字分会副会长、浙江省报刊协会理事，20多篇作品获全国教育新闻奖、浙江省新闻奖，10多篇论文发表在全国、省级新闻传媒报刊。 -->
                         </span>
                 </div>
                 <!-- <div class="boxtext boxtext2"></div> -->
@@ -93,6 +92,13 @@
                     <div class="bac-circle"></div>
                 </div>
             </div>
+
+            <div class="orbit" >
+                <div class="circle circle-bottom-left" index="8" fix="8">
+                    <div class="photo"></div>
+                    <div class="bac-circle"></div>
+                </div>
+            </div>
         </div>
         <div class="ellipse2"></div>
         <div class="ellipse1"></div>
@@ -102,7 +108,7 @@
 </body>
 <script>
     //名师介绍
-    
+    num=8
     //预加载本地数据
     nameArrayLocal=[]
     textArrayLocal=[]
@@ -120,7 +126,7 @@
         if(localStorage.getItem("teacherResponse")!==null){
             var teacherData = JSON.parse(localStorage.getItem("teacherResponse"));
 
-            for(let i=0;i<7;i++){
+            for(let i=0;i<num;i++){
                 nameArrayLocal[i]=teacherData[i].name
                 textArrayLocal[i]=teacherData[i].intro
                 majorArrayLocal[i]=teacherData[i].title
@@ -128,7 +134,7 @@
                 imgArrayLocal[i]=teacherData[i].picture_b64
             }
 
-            for(let i=1;i<=7;i++){
+            for(let i=1;i<=num;i++){
                 $("[fix="+i+"] .photo").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[i-1]+"")
             }
             let teacher=$("[index='4']")
@@ -157,7 +163,7 @@
         // 存储数据到localStorage中
         localStorage.setItem('teacherResponse', JSON.stringify(teacherResponse));
 
-        for(let i=0;i<7;i++){
+        for(let i=0;i<num;i++){
             nameArray[i]=teacherResponse[i].name
             textArray[i]=teacherResponse[i].intro
             majorArray[i]=teacherResponse[i].title
@@ -165,27 +171,29 @@
             imgArray[i]=teacherResponse[i].picture_b64
         }
 
-        for(let i=1;i<=7;i++){
+        let teacher=$("[index='4']")
+        let fix=teacher.attr("fix")-1
+
+        for(let i=1;i<=num;i++){
             if(imgUrlArray[i-1]!=imgUrlArrayLocal[i-1]){
                 console.log("teacher图片更新");
-                // console.log(imgUrlArray[0]+imgUrlArrayLocal[0]);
                 imgUrlArrayLocal[i-1]=imgUrlArray[i-1]
                 imgArrayLocal[i-1]=imgArray[i-1]
                 $("[fix="+i+"] .photo").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[i-1]+"").hide().fadeIn()
+                if(i==teacher.attr("fix")){
+                    console.log("teacher左上角photo更新");
+                    $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"").hide().fadeIn()
+
+                }
             }
         }
-        let teacher=$("[index='4']")
-        let fix=teacher.attr("fix")-1
-        console.log(teacher.attr("fix"));
+
         if(textArray[fix]!=textArrayLocal[fix]){
             console.log("teacher文字更新");
             textArrayLocal[fix]=textArray[fix]
             $(".boxtext span").html(textArrayLocal[fix]).hide().fadeIn()
         }
         if(nameArray[fix]!=nameArrayLocal[fix]){
-            console.log("teacher名字更新");
-            console.log("teacher当前获取的:"+nameArray[fix]);
-            console.log("teacher local获取的:"+nameArrayLocal[fix]);
             nameArrayLocal[fix]=nameArray[fix]
             $(".name span").html(nameArrayLocal[fix]).hide().fadeIn()
         }
@@ -194,11 +202,12 @@
             majorArrayLocal[fix]=majorArray[fix]
             $(".major span").html(majorArrayLocal[fix]).hide().fadeIn()
         }
-        if(imgUrlArray[fix]!=imgUrlArrayLocal[fix]){
-            console.log("teacher左上角photo更新");
-            imgUrlArrayLocal[fix]=imgUrlArray[fix]
-            imgArrayLocal[fix]=imgArray[fix]
-            $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"").hide().fadeIn()
+
+        for(let i=0;i<num;i++){
+            nameArrayLocal[i]=nameArray[i]
+            textArrayLocal[i]=textArray[i]
+            majorArrayLocal[i]=majorArray[i]
+
         }
 
     };
@@ -214,6 +223,7 @@
         let right1=$("[index='5']")
         let bottom_right=$("[index='6']")
         let bottom_left=$("[index='7']")
+        let bottom8=$("[index='8']")
         let circle=$("[index='3'] .bac-circle")
         let photo=$("[index='3'] .photo")
         let bar=$("[index='4'] .bac-circle")
@@ -226,7 +236,7 @@
         right2.addClass("to-right1")
         right1.addClass("to-bottom-right")
         bottom_right.addClass("to-bottom-left")
-        bottom_left.addClass("to-left1")
+        bottom8.addClass("to-left1")
         circle.addClass("to-bar")
         bar.addClass("to-circle")
         circle2.addClass("to-left1-circle")
@@ -237,7 +247,7 @@
     function indexUpdateNext(){
         $(".circle").each(function(index){
             let newIndex= $(this).attr('index')
-            newIndex=(newIndex ) % 7 + 1;
+            newIndex=(newIndex ) % num + 1;
             $(this).attr('index',newIndex)
         })
     }
@@ -251,7 +261,8 @@
         let right2=$("[index='5']")
         let right1=$("[index='6']")
         let bottom_right=$("[index='7']")
-        let bottom_left=$("[index='1']")
+        let bottom_left=$("[index='8']")
+        let bottom8=$("[index='1']")
         let circle=$("[index='4'] .bac-circle")
         let bar=$("[index='5'] .bac-circle")
         let circle2=$("[index='6'] .bac-circle")
@@ -263,7 +274,7 @@
         right2.removeClass("to-right1")
         right1.removeClass("to-bottom-right")
         bottom_right.removeClass("to-bottom-left")
-        bottom_left.removeClass("to-left1")
+        bottom8.removeClass("to-left1")
         circle.removeClass("to-bar")
         circle2.removeClass("to-left1-circle")
         bar.removeClass("to-circle")
@@ -285,35 +296,6 @@
     }
 
     function changeBox(){
-        // let nameArray=[
-        //     "杨志刚",
-        //     "邓海建",
-        //     "胡文江",
-        //     "肖纲领",
-        //     "胡欣红",
-        //     "曾瑞阳",
-        //     "程振伟",
-        // ]
-
-        // let majorArray=[
-        //     "浙江教育报刊总社副社长、副总编",
-        //     "",
-        //     "",
-        //     "",
-        //     "",
-        //     "",
-        //     "",
-        // ]
-
-        // let textArray=[
-        //     "     杨志刚，主任记者，浙江教育报刊总社副社长、副总编，兼任浙江教育报主编，中国少儿报刊协会数字分会副会长、浙江省报刊协会理事，20多篇作品获全国教育新闻奖、浙江省新闻奖，10多篇论文发表在全国、省级新闻传媒报刊。",
-        //     "     邓海建，电视新闻制片人。华中科技大学新闻传播学院特聘研究员。数家舆情研究院研究员。人民日报、光明日报、澎湃新闻、央视网、东方卫视、央广之声、荔枝APP、瞭望智库公号等数十家媒体特约评论员，财经专栏作家。UC名家等签约作家，作品千万字遍及全报全台全网。历获中国新闻奖、江苏五四青年奖章提名奖，全国十大网评员、全国“五个一百”正能量榜样等。国内多家头部互联网公司品牌及公关顾问。",
-        //     "     胡文江，汉江师范学院马克思主义学院副教授。系全国高校优秀网络栏目、湖北省重点网评阵地“红笔网”创始人，受聘新华网、中国文明网等多家主流媒体特约评论员。2019年入选教育部“高校网络教育名师”培育支持计划项目。先后获评全国高校思政课教学骨干、全国优秀网评员、湖北省岗位学雷锋标兵、“五个一百”网络正能量榜样。公开出版26万字时事评论集《沧浪》，学术论文被人大复印资料全文转载，多篇评论作品被中央网信办采用。",
-        //     "     肖纲领，《中国教育报》特约评论员；上海理工大学教师，复旦大学教育经济与管理专业博士生；上海出版传媒研究院、“上海市高技能人才培养研究中心”上海高校智库研究人员；上海市“晨光学者”；上海市教育科学研究项目、全国教育科学规划教育部青年项目获得者；在《中国教育报》《中国教师报》《浙江教育报》等媒体发表教育评论文章100余篇。",
-        //     "     胡欣红，浙江衢州人，杭州电子科技大学新媒体研究院兼职教授，浙江省中小学减负专家委员会委员，衢州市历史名师。人民日报客户端、央视网、央广网、中国青年报、中国教育报刊社、新京报、澎湃网、北京青年报、浙江日报、钱江晚报等十几家主流媒体特约评论员，省教育厅“教育之江”核心评论员，浙江教育报、浙江教育在线专栏作者。",
-        //     "     曾瑞阳，杭州日报视频总监，杭州市委网信办抖音平台执行总监，杭州新媒体精英联盟理事，30多件新媒体作品获浙江省新闻奖、杭州市新闻奖，带领团队50天打造百万粉丝抖音号，曾先后担任浙江传媒学院、杭州青年网络文化和新媒体人才学院特聘导师；受邀为省市新闻媒体单位，各级政府部门，以及浙江大学等在杭高校授课。",
-        //     "     程振伟，教育部高校网络教育名师，曾获得中国互联网发展基金会主办的“五个一百”网络正能量精品评选“正能量文字作品奖”，2020年浙江省网信办网评工作先进个人，红网红辣椒评论全国“年度佳作奖”获得者（2次），获评团中央中国青年网年度优秀评论员，浙江省教育厅中小学生减负工作专家指导委员会成员，中国网、中国青年网、人民日报客户端、浙江日报、浙江教育报、求智巷等主流媒体特约评论员或专栏作者。",
-        // ]
 
         let teacher=$("[index='3']")
         let fix=teacher.attr("fix")-1
@@ -325,7 +307,7 @@
 
         name.text(nameArrayLocal[fix]).hide().fadeIn();
         text.text(textArrayLocal[fix]).hide().fadeIn();
-        major.hide().fadeIn();
+        major.text(majorArrayLocal[fix]).hide().fadeIn();
     }
 
     function changePhoto(){

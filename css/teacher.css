@@ -484,6 +484,13 @@ body{
     translate: -5vw 5vw;
 }
 
+.ellipse3 [index='8']{
+
+    bottom: 90vw;
+    left: 8vw;
+    translate: -5vw 5vw;
+}
+
 @keyframes to-bottom-left {
     0% {
         bottom: 90vw;
