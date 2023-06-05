@@ -77,16 +77,17 @@
                 <div class="swiper mySwiper" id="swiper1">
                     <div class="swiper-wrapper" >
                     </div>
-                    <!-- <div class="swiper-button-next" style="    z-index: 20;"></div>
-                    <div class="swiper-button-prev" style="    z-index: 20;"></div> -->
+
                 </div>
 
                 <div class="swiper" id="swiper-side"> 
                     <div class="intro">
+                        
                     </div>
                     <!-- <div class="date"> 
-                           发布时间：2023-01-23
+                        https://mpvideo.qpic.cn/0b2etiaacaaacuajlrko6zrfbgwdagnaaaia.f10003.mp4?dis_k=7617e6d86ba5e3fc05e3a412226e046a&amp;dis_t=1685946485&amp;play_scene=10120&amp;auth_info=BID2sbVFQmoYvu2DnUEtGEMXbWJOYGliTTt5TmYeSyI7TkxFdnc=&amp;auth_key=04f0e550d032795debdd3292c897d14d
                     </div> -->
+                    
                    
                 </div>
                
@@ -185,6 +186,10 @@
     textArray_video=[]
     imgArray_video=[]
 
+    urlArrayLocal_video_practical=[]
+
+    urlArray_video_practical=[]
+
     textArrayLocal_video_practical=[]
     imgArrayLocal_video_practical=[]
 
@@ -221,7 +226,7 @@
             for(let i=0;i<lengthLocal_comment;i++){
 
                 textArrayLocal_comment[i]=commentData[i].content
-                urlArrayLocal_comment[i]=commentData[i].url
+                urlArrayLocal_comment[i]=replaceUrl(commentData[i].url)
                 // imgUrlArrayLocal_comment[i]=commentData[i].picture
                 // imgArrayLocal_comment[i]=commentData[i].picture_b64
             }
@@ -275,7 +280,7 @@
 
                 textArrayLocal_comment_practical[i]=commentData[i].content
                 
-                urlArrayLocal_comment_practical[i]=commentData[i].url
+                urlArrayLocal_comment_practical[i]=replaceUrl(commentData[i].url)
                 // imgUrlArrayLocal_comment_practical[i]=commentData[i].picture
                 // imgArrayLocal_comment_practical[i]=commentData[i].picture_b64
             }
@@ -669,7 +674,7 @@
             for(let i=0;i<length;i++){
 
                 textArrayLocal_video_practical[i]=videoData[i].content
-                // urlArrayLocal_video[i]=videoData[i].url
+                urlArrayLocal_video_practical[i]=replaceUrl(videoData[i].url)
                 // imgUrlArrayLocal_video[i]=videoData[i].picture
                 // imgArrayLocal_video[i]=videoData[i].picture_b64
             }
@@ -677,8 +682,6 @@
             for(let i=1;i<=length;i++){
                 $("#swiper1 [index="+i+"] .img").css("background-image","linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(data:image/jpeg;base64,"+imgArrayLocal_video_practical[i-1]+"")
             }
-
-            introUpdate(length,2)
             
         }
         else{
@@ -773,7 +776,7 @@
         //当前的各项参数数值
         for(let i=0;i<length;i++){
             textArray_video_practical[i]=videoResponsePractical[i].content
-            // urlArray_video[i]=videoResponse[i].url
+            urlArray_video_practical[i]=replaceUrl(videoResponsePractical[i].url)
             // imgUrlArray_video[i]=videoResponse[i].picture
             imgArray_video_practical[i]=videoResponsePractical[i].picture_b64
         }
@@ -785,6 +788,10 @@
             if(textArray_video_practical[i]!=textArrayLocal_video_practical[i]){
                 console.log("video文字更新");
                 textArrayLocal_video_practical[i]=textArray_video_practical[i]
+            }
+            if(urlArray_video_practical[i]!=urlArrayLocal_video_practical[i]){
+                console.log("video url更新");
+                urlArrayLocal_video_practical[i]=urlArray_video_practical[i]
             }
         }
 
@@ -810,17 +817,9 @@
             }
             i=i+1
         })
-        // for(let i=1;i<=length;i++){
-        //     if(i==1){
-        //         $("#swiper1 [index="+i+"]").attr("flag",1)
-        //     }
-        //     else{
-        //         $("#swiper1 [index="+i+"]").attr("flag",0)
-        //     }
-        // }
 
     }
-
+    
     flagUpdate()
 
     function introUpdate(choice){
@@ -829,16 +828,12 @@
         let active=$("#swiper1 [flag=1]")
         let intro=$(".intro")
         let indexx=active.attr("index")-1
-        console.log(indexx);
-        console.log(textArrayLocal_video[0]);
-        console.log(textArrayLocal_video[1]);
-        console.log(textArrayLocal_video[2]);
-        console.log(textArrayLocal_video[indexx]);
+
         if(choice==1){
             intro.html(textArrayLocal_video[indexx]).hide().fadeIn()
         }
         else if(choice==2){
-            intro.html(textArrayLocal_video_practical[indexx]).hide().fadeIn()
+            intro.html(`<div class="tpa"><a href="`+urlArrayLocal_video_practical[indexx]+`" target="_blank">`+urlArrayLocal_video_practical[indexx]+`</a>`+`</div>\n`+textArrayLocal_video_practical[indexx]).hide().fadeIn()
         }
     }
     
@@ -848,7 +843,7 @@
 
     const swiper1 = new Swiper('#swiper1', {
         grabCursor: true,
-        slideToClickedSlide:true,
+        // slideToClickedSlide:true,
         lazy: {
                 loadPrevNext: true,
             },
