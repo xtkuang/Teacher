@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="orbit" >
+            <!-- <div class="orbit" >
                 <div class="circle circle-bottom-left" index="7" fix="7">
                     <div class="photo"></div>
                     <div class="bac-circle"></div>
@@ -98,7 +98,7 @@
                     <div class="photo"></div>
                     <div class="bac-circle"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="ellipse2"></div>
         <div class="ellipse1"></div>
@@ -108,7 +108,8 @@
 </body>
 <script>
     //名师介绍
-    num=8
+    //添加删除教师时修改num的数量
+    num=6
     //预加载本地数据
     nameArrayLocal=[]
     textArrayLocal=[]
@@ -214,7 +215,7 @@
     xhr.send()
     const timeInterval=0.7
     let isAnimating=false
-
+    //添加删除教师时修改变量名
     function moveNext(){
         let left1=$("[index='1']")
         let left2=$("[index='2']")
@@ -222,21 +223,21 @@
         let right2=$("[index='4']")
         let right1=$("[index='5']")
         let bottom_right=$("[index='6']")
-        let bottom_left=$("[index='7']")
-        let bottom8=$("[index='8']")
+        // let bottom_left=$("[index='7']")
+        // let bottom8=$("[index='8']")
         let circle=$("[index='3'] .bac-circle")
         let photo=$("[index='3'] .photo")
         let bar=$("[index='4'] .bac-circle")
         let circle2=$("[index='5'] .bac-circle")
 
-
+        //添加删除教师时修改变量名,使最后一个老师指向left1
         left1.addClass("to-left2")
         left2.addClass("to-mid")
         mid.addClass("to-right2")
         right2.addClass("to-right1")
         right1.addClass("to-bottom-right")
-        bottom_right.addClass("to-bottom-left")
-        bottom8.addClass("to-left1")
+        bottom_right.addClass("to-left1")
+        // bottom8.addClass("to-left1")
         circle.addClass("to-bar")
         bar.addClass("to-circle")
         circle2.addClass("to-left1-circle")
@@ -252,7 +253,7 @@
         })
     }
 
-
+    //添加删除教师时修改变量名,使最后一个老师的index为1
     //idnex值应该为之前add多1
     function removeClassNext(){
         let left1=$("[index='2']")
@@ -260,21 +261,22 @@
         let mid=$("[index='4']")
         let right2=$("[index='5']")
         let right1=$("[index='6']")
-        let bottom_right=$("[index='7']")
-        let bottom_left=$("[index='8']")
-        let bottom8=$("[index='1']")
+        let bottom_right=$("[index='1']")
+        // let bottom_left=$("[index='8']")
+        // let bottom8=$("[index='1']")
         let circle=$("[index='4'] .bac-circle")
         let bar=$("[index='5'] .bac-circle")
         let circle2=$("[index='6'] .bac-circle")
         let photo=$("[index='4'] .photo")
 
+        //添加删除教师时remove的样式要与之前添加的样式相对应
         left1.removeClass("to-left2")
         left2.removeClass("to-mid")
         mid.removeClass("to-right2")
         right2.removeClass("to-right1")
         right1.removeClass("to-bottom-right")
-        bottom_right.removeClass("to-bottom-left")
-        bottom8.removeClass("to-left1")
+        bottom_right.removeClass("to-left1")
+        // bottom8.removeClass("to-left1")
         circle.removeClass("to-bar")
         circle2.removeClass("to-left1-circle")
         bar.removeClass("to-circle")
