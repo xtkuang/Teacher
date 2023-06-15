@@ -377,6 +377,28 @@ ul{
     color: #0A1629;
 }
 
+.main #content1 #swiper-side .tpa{
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: inline-block;
+
+    width: 100%;
+}
+
+.main #content1 #swiper-side .tpa a{
+
+    font-family: 'PingFang SC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    text-decoration: none;
+    color: #3F8CFF;
+
+}
+
 
 .main .icon{
     display: flex;
@@ -555,6 +577,7 @@ ul{
 
 
 #swiper3 .swiper-slide .text .tp{
+    display: inline-block;
     justify-self: end;
     position: relative;
     /* position: absolute; */
@@ -562,9 +585,13 @@ ul{
 
     color: #3F8CFF;
     margin-bottom: 40px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 .swiper-slide .text .tp a{
+
     font-family: 'PingFang SC';
     font-style: normal;
     font-weight: 400;
@@ -573,6 +600,7 @@ ul{
     /* identical to box height, or 150% */
     text-decoration: none;
     color: #3F8CFF;
+
 
 }
 
@@ -586,7 +614,7 @@ ul{
     /* or 150% */
     color: #0A1629;
     justify-self: start;
-    text-indent: 2em;
+    /* text-indent: 2em; */
     white-space:break-spaces;
     overflow: auto;
     /* scrollbar-width: none; */
