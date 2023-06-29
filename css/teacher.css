@@ -491,6 +491,20 @@ body{
     translate: -5vw 5vw;
 }
 
+.ellipse3 [index='9']{
+
+    bottom: 90vw;
+    left: 0vw;
+    translate: -5vw 5vw;
+}
+
+.ellipse3 [index='10']{
+
+    bottom: 90vw;
+    left: 8vw;
+    translate: -5vw 5vw;
+}
+
 @keyframes to-bottom-left {
     0% {
         bottom: 90vw;
