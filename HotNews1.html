@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HotNews</title>
+  <link rel="stylesheet" href="./css/HotNews.css">
+  <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+  <style>
+    .swiper {
+      width: 100%;
+      height: 100%;
+      --swiper-navigation-size: 25px;
+    }
+
+    .swiper-wrapper {
+      height: 85%;
+    }
+
+    .swiper-slide {
+      background-color: pink;
+
+      font-size: 1.4063vw;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+
+      width: 50vw;
+      /*height: 15.625vw;*/
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+
+    .page-out {
+
+      opacity: 0;
+      transition: all 0.3s ease-out;
+    }
+
+    .page-in {
+      transform: translateY(0px);
+      opacity: 1;
+      transition: all 0.3s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main1">
+    <div class="HotNews1">
+      <div class="upOne">
+        <img src="./picture/00.webp" alt="">
+        <div class="container">
+          <div class="swiper mySwiper swiper1">
+            <div class="swiper-wrapper" id="swiper1">
+
+            </div>
+            <div class="nag">
+              <div id="prev" class="swiper-button-prev" style="    z-index: 20;"></div>
+              <div id="pagination" class="swiper-pagination"></div>
+              <div id="next" class="swiper-button-next" style="    z-index: 20;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="downOne">
+
+        <div class="container">
+          <div class="swiper mySwiper swiper2">
+            <div class="swiper-wrapper" id="swiper2">
+
+
+            </div>
+            <div class="nag">
+              <div id="prev" class="swiper-button-prev" style="    z-index: 20;"></div>
+              <div id="pagination" class="swiper-pagination"></div>
+              <div id="next" class="swiper-button-next" style="    z-index: 20;"></div>
+            </div>
+
+          </div>
+
+        </div>
+        <img src="./picture/03.webp" alt="">
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script>
+  const swiper1 = new Swiper(".swiper1", {
+    lazy: {
+      loadPrevNext: true,
+      loadOnTransitionStart: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+      renderFraction: function (currentClass, totalClass) {
+        return '<span class="' + currentClass + '"></span>' +
+          ' of ' +
+          '<span class="' + totalClass + '"></span>'
+      },
+    },
+
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+
+      disabledClass: 'my-button-disabled',
+    },
+  })
+  const swiper2 = new Swiper(".swiper2", {
+    lazy: {
+      loadPrevNext: true,
+      loadOnTransitionStart: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+      renderFraction: function (currentClass, totalClass) {
+        return '<span class="' + currentClass + '"></span>' +
+          ' of ' +
+          '<span class="' + totalClass + '"></span>'
+      },
+    },
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+      disabledClass: 'my-button-disabled',
+    },
+  })
+  function updataswiper (data) {
+    //alert("updataswiper")
+    console.log(data)
+    let cnt = 0
+    let total = data.length / 6  //总页数  
+    let container1 = document.querySelector("#swiper1")
+    let container2 = document.querySelector("#swiper1")
+    while (total > 0) {
+      //console.log("进入循环" + total)
+      let ul = document.createElement("ul")
+      for (let l = 0; l < 6 && cnt < data.length; l++) {
+        let li = document.createElement("li")
+        li.id = data[cnt].id//id
+        //console.log("id" + data[cnt].id)
+        //console.log("content:" + data[cnt].content)
+        li.innerHTML = data[cnt++].content//content
+
+        li.onclick = load //onclick
+        ul.appendChild(li)
+        //console.log("结束内循环")
+        //console.log(ul)
+      }
+      swiper = document.createElement("div")
+      swiper.className = "swiper-slide"
+      swiper.appendChild(ul)
+      //console.log(swiper)
+      if (total % 2 == 0) {
+        //console.log("swiper1")
+        container1.appendChild(swiper)
+      }
+      else {
+        //console.log("swiper2")
+        container2.appendChild(swiper)
+      }
+      total--
+    }
+
+
+  }
+
+  $.ajax({//获取内容，创建元素
+    type: "get",
+    url: "http://118.25.189.240:5000/api/news",
+    success: function (data) {
+      updataswiper(data)
+      //$.parser.parse()
+      swiper1.update()
+      swiper2.update()
+    }
+  })
+</script>
+<script>
+  function load (e) {
+    let element = e.target
+    data = element.id
+    console.log(e)
+    console.log(element)
+    console.log(data)
+    const body = document.querySelector("body")
+    body.classList.add("page-out")
+    setTimeout(() => {
+      window.location.href = 'HotNews2.html?data=' + encodeURIComponent(data)
+    }, 300)
+  }
+
+
+</script>
+
+</html>

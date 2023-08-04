@@ -140,7 +140,7 @@ body {
   font-size: 35px;
   line-height: 49px;
   /* identical to box height */
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 0.95);
 }
 .swiper-slide p {
   overflow-y: auto;

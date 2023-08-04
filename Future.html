@@ -49,31 +49,43 @@
                     </div>
                     <p class="scrollbar"></p>
                   </div>
+                  <div class="swiper-slide">
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <p class="scrollbar"></p>
+                  </div>
+                  <div class="swiper-slide">
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <p class="scrollbar"></p>
+                  </div>
+                  <div class="swiper-slide">
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <p class="scrollbar"></p>
+                  </div>
+                  <div class="swiper-slide">
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <p class="scrollbar"></p>
+                  </div>
+                  <div class="swiper-slide">
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <p class="scrollbar"></p>
+                  </div>
+                  <div class="swiper-slide">
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <p class="scrollbar"></p>
+                  </div>
                 </div>
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <div>
-                          <h1></h1>
-                      </div>
-                      <p class="scrollbar"></p>
-                    </div>
-                  </div>
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <div>
-                          <h1></h1>
-                      </div>
-                      <p class="scrollbar"></p>
-                    </div>
-                  </div>
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <div>
-                          <h1></h1>
-                      </div>
-                      <p class="scrollbar"></p>
-                    </div>
-                  </div>
         </div>
     </div>
    
@@ -105,10 +117,22 @@
             type:"get",
             url:"http://118.25.189.240:5000/api/future_video",
             success:function (data) {
+                num=["一","两","三","五","五十","一百五十","一百"];
+                
                 console.log(data);
-                document.querySelector(".shortVideo a").href=data[0].url;
-                document.querySelector(".shortVideo a img").src="data:image/jpeg;base64,"+ data[0].picture_b64;
-                document.querySelector("#vArt").innerHTML=data[0].content;
+                document.querySelector(".shortVideo a").href=data[2].url;
+                //document.querySelector(".shortVideo a img").src="data:image/jpeg;base64,"+ data[2].picture_b64;
+                //document.querySelector(".shortVideo a img").src="url("+ data[1].picture +")";
+                document.querySelector(".shortVideo a img").src="https://bkimg.cdn.bcebos.com/pic/a044ad345982b2b79b9a104a39adcbef76099b32";
+                
+                article=data[2].content;
+                const regex = /[一两三四五六七八十百]+/g;
+                const replacedStr = article.replace(regex, '<strong>$&</strong>');
+                //console.log()
+                console.log("article:")
+                console.log(article);
+                article=replacedStr.split("\\n");
+                document.querySelector("#vArt").innerHTML=article.join("<br\>");
               }
         
         })
@@ -120,21 +144,26 @@
                 let main=document.querySelector(".swiper-wrapper");
                 let news=document.querySelector(".swiper-slide");
                 let new_node=news.cloneNode("1");
+                
                 for(let i=0;i<data.length;i++){                   
-                    if(!i){
-                        console.log(news.children[0].style)
-                        news.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
-                        //news.children[0].style.backgroundImage="url("+ ")";
-                        news.children[0].children[0].innerHTML=data[i].id;
-                        news.children[1].innerHTML=data[i].content;
-                    }
-                    else{
-                        let new_one=new_node.cloneNode("1");
-                        new_one.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
-                        new_one.children[0].children[0].innerHTML=data[i].id;
-                        new_one.children[1].innerHTML=data[i].content;
-                        main.append(new_one);
-                    }
+                    //if(!i){
+                        //news.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
+                        //main.children[i].children[0].style.backgroundImage="url("+ "https://bkimg.cdn.bcebos.com/pic/a044ad345982b2b79b9a104a39adcbef76099b32" +")";
+                        main.children[i].children[0].style.backgroundImage='url("./picture/0'+i+'.webp")';
+                        main.children[i].children[0].children[0].innerHTML=data[i].url;
+                        content=data[i].content.split("\\n");
+                        main.children[i].children[1].innerHTML=content.join('<br\>');
+                    //}
+                    //else{
+                    //    let new_one=new_node.cloneNode("1");
+                    //    //new_one.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
+                    //    news.children[0].style.backgroundImage="url("+ data[i].picture +")";
+                    //    console.log(i+data[i].picture);
+                    //    
+                    //    new_one.children[0].children[0].innerHTML=data[i].id;
+                    //    new_one.children[1].innerHTML=data[i].content;
+                    //    main.append(new_one);
+                    //}
                     
                 }   
                 
