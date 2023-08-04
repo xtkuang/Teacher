@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>热点新闻</title>
+  <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 100%;
+    }
+
+    img {
+      margin: 2.6563vw 3.5156vw 0 2.6563vw;
+      border-radius: 2.3438vw;
+      width: 32.2656vw;
+      height: 25.7813vw;
+      flex-shrink: 0;
+    }
+
+    .container {
+      width: 44.5313vw;
+      height: 39.9219vw;
+      margin: 2.6563vw 2.8906vw 0 0;
+      flex-shrink: 0;
+      color: #0A1629;
+      font-family: PingFang SC;
+      font-size: 1.25vw;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.875vw;
+      overflow: visible;
+      /* 150% */
+    }
+
+    .swiper {
+      --swiper-navigation-size: 25px;
+    }
+
+    .swiper-slide p {
+      padding-right: 2px;
+      width: 44.5313vw;
+      height: 38vw;
+      flex-shrink: 0;
+    }
+
+    .scrollbar {
+      overflow-y: auto;
+    }
+
+    .scrollbar::-webkit-scrollbar {
+      width: 0.3906vw;
+      background-color: rgba(233, 235, 237, 0);
+      border-radius: 0.7031vw;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 0.4688vw rgba(0, 0, 0, 0.3);
+      background-color: #e9ebed;
+      border-radius: 0.7031vw;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+      border-radius: 0.7031vw;
+      background-color: #3f8cff;
+      max-height: 0.0781vw;
+      max-width: 0.0781vw;
+    }
+
+    .scrollbar::-webkit-scrollbar-button {
+      height: 3.9063vw;
+    }
+
+    .back {
+      position: absolute;
+      bottom: 60px !important;
+      left: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #svg {
+      position: relative;
+      right: -5px;
+      width: 60px;
+      height: 40px;
+    }
+
+    .nag {
+      height: 200px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      height: 40px;
+    }
+
+    .nag #next {
+      z-index: 50;
+      position: relative;
+      width: 30px !important;
+    }
+
+    .nag #pagination {
+      position: relative;
+      height: 20px;
+      width: 200px;
+      z-index: 50;
+      bottom: -10px;
+    }
+
+    .nag #prev {
+      position: relative;
+      z-index: 50;
+      width: 30px !important;
+    }
+
+    .page-out {
+
+      opacity: 0;
+      transition: all 0.3s ease-out;
+    }
+
+    .page-in {
+      transform: translateY(0px);
+      opacity: 1;
+      transition: all 0.3s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./picture/01.webp" id="img">
+  <div class="container">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper" id="swiper3">
+        <div class="swiper-slide">
+          <p class="scrollbar">
+            关于这个事，我简单说两句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，可能，你听的不是很明白，但是意思就是那么个意思，不知道的你也不用去猜，这种事情见得多了，我只想说懂得都懂，不懂的我也不多解释，毕竟自己知道就好，细细品吧。你们也别来问我怎么了，利益牵扯太大，说了对你我都没好处，当不知道就行了，其余的我只能说这里面水很深，牵扯到很多东西。详细情况你们自己是很难找的，网上大部分已经删除干净了，所以我只能说懂得都懂。懂的人已经基本都获利上岸什么的
+            关于这个事，我简单说两句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，可能，你听的不是很明白，但是意思就是那么个意思，不知道的你也不用去猜，这种事情见得多了，我只想说懂得都懂，不懂的我也不多解释，毕竟自己知道就好，细细品吧。你们也别来问我怎么了，利益牵扯太大，说了对你我都没好处，关于这个事，我简单说两句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，可能，你听的不是很明白，但是意思就是那么个意思，不知道的你也不用去猜，这种事情见得多了，我只想说懂得都懂，不懂的我也不多解释，毕竟自己知道就好，细细品吧。你们也别来问我怎么了，利益牵扯太大，说了对你我都没好处，
+            关于这个事，我简单说两句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，可能，你听的不是很明白，但是意思就是那么个意思，不知道的你也不用去猜，这种事情见得多了，我只想说懂得都懂，不懂的我也不多解释，毕竟自己知道就好，细细品吧。你们也别来问我怎么了，利益牵扯太大，说了对你我都没好处，当不知道就行了，其余的我只能说这里面水很深，牵扯到很多东西。详细情况你们自己是很难找的，网上大部分已经删除干净了，所以我只能说懂得都懂。懂的人已经基本都获利上岸什么的
+            关于这个事，我简单说两句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，可能，你听的不是很明白，但是意思就是那么个意思，不知道的你也不用去猜，这种事情见得多了，我只想说懂得都懂，不懂的我也不多解释，毕竟自己知道就好，细细品吧。你们也别来问我怎么了，利益牵扯太大，说了对你我都没好处，关于这个事，我简单说两句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，你明白就行，总而言之，这个事呢，现在就是这个情况，具体的呢，大家也都看得到，也得出来说那么几句，可能，你听的不是很明白，但是意思就是那么个意思，不知道的你也不用去猜，这种事情见得多了，我只想说懂得都懂，不懂的我也不多解释，毕竟自己知道就好，细细品吧。你们也别来问我怎么了，利益牵扯太大，说了对你我都没好处，
+          </p>
+        </div>
+
+      </div>
+      <div class="nag">
+        <div id="prev" class="swiper-button-prev" style="    z-index: 20;"></div>
+        <div id="pagination" class="swiper-pagination"></div>
+        <div id="next" class="swiper-button-next" style="    z-index: 20;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="back" onclick="back()">
+    <img src="./svg/back.svg" style="width:40px" id="svg" />
+    <span style="text-align: center;">返回</span>
+  </div>
+
+
+</body>
+<script src="./js/swiper-bundle.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script>
+  function pictureChange (id) {
+    let pic = document.querySelector("#img")
+    pic.classList.add("page-out")
+    setTimeout(() => {
+      pic.src = picture[id]
+      pic.classList.remove("page-out")
+      pic.classList.add("page-in")
+    }, 300)
+  }
+  function load () {
+    //let data = window.location.search.substring(1).split('=')[1]
+    let params = new URLSearchParams(window.location.search)
+    let data = params.get('data')
+    console.log("loading")
+    return data
+  }
+  function turnTo () {
+    let id = load()
+    console.log("id:" + id)
+    let slide = document.getElementById(id)
+    //slide.classList.add("swiper-slide-active")
+
+    swiper3.slideTo(3, 0.1, false)//跳转到指定页面
+    pictureChange(id)//切换图片
+
+  }
+  function swiperLoad () {
+    let id = Number(load())
+    swiper3 = new Swiper(".mySwiper", {
+      initialSlide: id,
+      lazy: {
+        loadPrevNext: true,
+        loadOnTransitionStart: true,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        type: "fraction",
+        renderFraction: function (currentClass, totalClass) {
+          return '<span class="' + currentClass + '"></span>' +
+            ' of ' +
+            '<span class="' + totalClass + '"></span>'
+        },
+      },
+
+      spaceBetween: 20,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+
+        disabledClass: 'my-button-disabled',
+      },
+    })
+  }
+
+  let picture = {
+    "default": "./picture/01.webp"
+  }
+
+
+
+  $.ajax({//获取内容，创建元素
+    type: "get",
+    url: "http://118.25.189.240:5000/api/news",
+    success: function (data) {
+      //alert("???")
+      console.log("Here is HorNews2")
+      console.log(data)
+      const swiper = document.querySelector("#swiper3")
+      for (let i = 0; i < data.length; i++) {
+        console.log("进入循环" + i)
+        const p = document.createElement("p")
+        p.innerHTML = data[i].content
+        console.log(p)
+        const swiperslide = document.createElement("div")
+        swiperslide.className = "swiper-slide"
+        swiperslide.id = data[i].id
+        swiperslide.appendChild(p)
+        console.log(swiperslide)
+        swiper.appendChild(swiperslide)
+        Object.defineProperty(picture, data[i].id, {
+          value: data[i].picture,
+          writable: true,
+          enumerable: true,
+          configurable: true
+        })
+        //picture.push(data[i].picture)
+        console.log(picture)
+      }
+      //.update()
+      //setTimeout(turnTo, 1)
+      pictureChange(load())
+      swiperLoad()
+      //swiper3.update()
+
+    }
+  })
+
+  function back () {
+    data = "back"
+    const body = document.querySelector("body")
+    body.classList.add("page-out")
+    setTimeout(() => {
+      window.location.href = 'HotNews1.html?data=' + encodeURIComponent(data)
+    }, 300)
+  }
+
+
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HotNews</title>
+  <link rel="stylesheet" href="/css/HotNews.css">
+  <link rel="stylesheet" href="/css/swiper-bundle.min.css">
+  <style>
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      background-color: pink;
+
+      font-size: 1.4063vw;
+      background: #fff;
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+
+      width: 50vw;
+      height: 15.625vw;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="Title">
+      <div class="sTitle">Latest news</div>
+      <div class="mainTitle">热点新闻</div>
+    </div>
+    <div class="HotNews">
+      <iframe src="./HotNews1.html" frameborder="0" style="height:100%;width:100%"></iframe>
+    </div>
+  </div>
+
+</body>
+<script src="./js/swiper-bundle.min.js"></script>
+<script>
+  swiper = new Swiper(".mySwiper", {
+    lazy: {
+      loadPrevNext: true,
+      loadOnTransitionStart: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+      renderFraction: function (currentClass, totalClass) {
+        return '<span class="' + currentClass + '"></span>' +
+          ' of ' +
+          '<span class="' + totalClass + '"></span>'
+      },
+    },
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+      disabledClass: 'my-button-disabled',
+    },
+  });
+</script>
+
+
+</html>
