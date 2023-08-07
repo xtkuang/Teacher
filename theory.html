@@ -299,7 +299,7 @@
 
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://118.25.189.240:5000/api/comment_theory', true);
+    xhr.open('GET', 'https://hdums.hdu.edu.cn/api/comment_theory', true);
     xhr.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr.onload = function() {
         //flag为1时表示本地存储没有数据要创建slides
@@ -374,7 +374,7 @@
     xhr.send()
 
     var xhrp = new XMLHttpRequest();
-    xhrp.open('GET', 'http://118.25.189.240:5000/api/comment_practical', true);
+    xhrp.open('GET', 'https://hdums.hdu.edu.cn/api/comment_practical', true);
     xhrp.responseType = 'json'; // 如果接口返回的是JSON数据
     xhrp.onload = function() {
 
@@ -505,7 +505,7 @@
 
     //爆款新闻
     var xhr1 = new XMLHttpRequest();
-    xhr1.open('GET', 'http://118.25.189.240:5000/api/news_theory', true);
+    xhr1.open('GET', 'https://hdums.hdu.edu.cn/api/news_theory', true);
     xhr1.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr1.onload = function() {
         let flag=0
@@ -574,7 +574,7 @@
     xhr1.send()
 
     var xhr1p = new XMLHttpRequest();
-    xhr1p.open('GET', 'http://118.25.189.240:5000/api/news_practical', true);
+    xhr1p.open('GET', 'https://hdums.hdu.edu.cn/api/news_practical', true);
     xhr1p.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr1p.onload = function() {
         var newsResponsePractical = xhr1p.response; // 获取服务器返回的数据
@@ -690,7 +690,7 @@
     }
 
     var xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'http://118.25.189.240:5000/api/video_theory', true);
+    xhr2.open('GET', 'https://hdums.hdu.edu.cn/api/video_theory', true);
     xhr2.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr2.onload = function() {
         let flag=0
@@ -764,7 +764,7 @@
     xhr2.send()
 
     var xhr2p = new XMLHttpRequest();
-    xhr2p.open('GET', 'http://118.25.189.240:5000/api/video_practical', true);
+    xhr2p.open('GET', 'https://hdums.hdu.edu.cn/api/video_practical', true);
     xhr2p.responseType = 'json'; // 如果接口返回的是JSON数据
     xhr2p.onload = function() {
 

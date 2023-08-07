@@ -23,7 +23,7 @@
 
 $.ajax({
     type:"get",
-    url:"http://118.25.189.240:5000/api/article",
+    url:"https://hdums.hdu.edu.cn/api/article",
     dataType:"json",
     async:"false",
     success:function (data) {

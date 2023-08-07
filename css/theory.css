@@ -453,7 +453,6 @@ ul{
     flex: 5;
     /* background-image: url(../img/logo.jpg); */
     border-radius: 30px;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
     /* border: 2px solid black; */
     margin-right: 34px;
     background-repeat: no-repeat;
@@ -537,10 +536,10 @@ ul{
 
     /* background-image: url(../img/logo.jpg); */
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     border-radius: 10px;
     height: 60%;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
+
 }
 
 #content3 #swiper3{

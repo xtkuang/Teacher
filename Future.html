@@ -115,7 +115,7 @@
     <script>
         $.ajax({
             type:"get",
-            url:"http://118.25.189.240:5000/api/future_video",
+            url:"https://hdums.hdu.edu.cn/api/future_video",
             success:function (data) {
                 num=["一","两","三","五","五十","一百五十","一百"];
                 
@@ -138,7 +138,7 @@
         })
         $.ajax({
             type:"get",
-            url:"http://118.25.189.240:5000/api/future_news",
+            url:"https://hdums.hdu.edu.cn/api/future_news",
             success:function (data) {
                 console.log(data);
                 let main=document.querySelector(".swiper-wrapper");
