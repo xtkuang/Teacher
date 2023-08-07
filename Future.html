@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D</title>
-   
+
     <!-- <link rel="stylesheet" href="./css/Future.css"> -->
     <link rel="stylesheet" href="./css/text.css">
     <link rel="stylesheet" href="./css/swiper-bundle.min.css">
     <link rel="stylesheet" href="./css/font.css">
     <script src="./js/jquery.min.js"></script>
 </head>
-<body>
-  
-    
-       
 
-  
+<body>
+
+
+
+
+
     <div class="main-future">
         <div>
             <h6>Future development direction and prospects</h6>
             <h1>未来发展方向与展望</h1>
-        </div>  
+        </div>
         <div class="shortVideo">
             <div>
                 <li>
@@ -33,73 +35,73 @@
                     <p class="scrollbar" id="vArt"></p>
                 </li>
             </div>
-           <a href="">
-            <img src="" alt="">
-           </a>
-               <!-- <div class="img"></div> -->
-               
-            
+            <a href="">
+                <img src="" alt="">
+            </a>
+            <!-- <div class="img"></div> -->
+
+
         </div>
         <div class="future-swiper">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div>
-                        <h1></h1>
+                    <div class="swiper-slide">
+                        <div>
+                            <h1></h1>
+                        </div>
+                        <p class="scrollbar"></p>
                     </div>
-                    <p class="scrollbar"></p>
-                  </div>
                 </div>
+            </div>
         </div>
-    </div>
-   
-   
 
-    
+
+
+
 </body>
 
-    <!-- <script>
+<!-- <script>
         function loadPage(pageName) {
             document.getElementById('Frame').src = pageName;
         } 
     </script> -->
-    <!-- <script>
+<!-- <script>
         function changeClassName(obj){
             obj.classList.add("selected");
         }
@@ -111,74 +113,74 @@
         }
         
     </script> -->
-    <script src="./js/swiper-bundle.min.js"></script>
-    <script>
-        $.ajax({
-            type:"get",
-            url:"https://hdums.hdu.edu.cn/api/future_video",
-            success:function (data) {
-                num=["一","两","三","五","五十","一百五十","一百"];
-                
-                console.log(data);
-                document.querySelector(".shortVideo a").href=data[2].url;
-                //document.querySelector(".shortVideo a img").src="data:image/jpeg;base64,"+ data[2].picture_b64;
-                //document.querySelector(".shortVideo a img").src="url("+ data[1].picture +")";
-                document.querySelector(".shortVideo a img").src="https://bkimg.cdn.bcebos.com/pic/a044ad345982b2b79b9a104a39adcbef76099b32";
-                
-                article=data[2].content;
-                const regex = /[一两三四五六七八十百]+/g;
-                const replacedStr = article.replace(regex, '<strong>$&</strong>');
-                //console.log()
-                console.log("article:")
-                console.log(article);
-                article=replacedStr.split("\\n");
-                document.querySelector("#vArt").innerHTML=article.join("<br\>");
-              }
-        
-        })
-        $.ajax({
-            type:"get",
-            url:"https://hdums.hdu.edu.cn/api/future_news",
-            success:function (data) {
-                console.log(data);
-                let main=document.querySelector(".swiper-wrapper");
-                let news=document.querySelector(".swiper-slide");
-                let new_node=news.cloneNode("1");
-                
-                for(let i=0;i<data.length;i++){                   
-                    //if(!i){
-                        //news.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
-                        //main.children[i].children[0].style.backgroundImage="url("+ "https://bkimg.cdn.bcebos.com/pic/a044ad345982b2b79b9a104a39adcbef76099b32" +")";
-                        main.children[i].children[0].style.backgroundImage='url("./picture/0'+i+'.webp")';
-                        main.children[i].children[0].children[0].innerHTML=data[i].url;
-                        content=data[i].content.split("\\n");
-                        main.children[i].children[1].innerHTML=content.join('<br\>');
-                    //}
-                    //else{
-                    //    let new_one=new_node.cloneNode("1");
-                    //    //new_one.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
-                    //    news.children[0].style.backgroundImage="url("+ data[i].picture +")";
-                    //    console.log(i+data[i].picture);
-                    //    
-                    //    new_one.children[0].children[0].innerHTML=data[i].id;
-                    //    new_one.children[1].innerHTML=data[i].content;
-                    //    main.append(new_one);
-                    //}
-                    
-                }   
-                
-              }
-        })
-        
-    </script>
-   
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 2.2,
-            spaceBetween: 38,
-            freeMode: true,
-          });
-    </script>
-</html>
+<script src="./js/swiper-bundle.min.js"></script>
+<script>
+    $.ajax({
+        type: "get",
+        url: "http://118.25.189.240:5000/api/future_video",
+        success: function (data) {
+            num = ["一", "两", "三", "五", "五十", "一百五十", "一百"]
 
-    
+            console.log(data)
+            document.querySelector(".shortVideo a").href = data[2].url
+            document.querySelector(".shortVideo a img").src = "data:image/jpeg;base64," + data[2].picture_b64
+            //document.querySelector(".shortVideo a img").src="url("+ data[1].picture +")";
+            //document.querySelector(".shortVideo a img").src = "https://bkimg.cdn.bcebos.com/pic/a044ad345982b2b79b9a104a39adcbef76099b32"
+
+            article = data[2].content
+            const regex = /[一两三四五六七八十百]+/g
+            const replacedStr = article.replace(regex, '<strong>$&</strong>')
+            //console.log()
+            console.log("article:")
+            console.log(article)
+            article = replacedStr.split("\\n")
+            document.querySelector("#vArt").innerHTML = article.join("<br\>")
+        }
+
+    })
+    $.ajax({
+        type: "get",
+        url: "https://hdums.hdu.edu.cn/api/future_news",
+        success: function (data) {
+
+            console.log(data)
+            let main = document.querySelector(".swiper-wrapper")
+            let news = document.querySelector(".swiper-slide")
+            let new_node = news.cloneNode("1")
+
+            for (let i = 0; i < data.length; i++) {
+                //if(!i){
+                //news.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
+                main.children[i].children[0].style.backgroundImage = "url(data:image/jpeg;base64," + data[i].picture_b64 + ")"
+                //main.children[i].children[0].style.backgroundImage = 'url("./picture/0' + i + '.webp")'
+                main.children[i].children[0].children[0].innerHTML = data[i].url
+                content = data[i].content.split("\\n")
+                main.children[i].children[1].innerHTML = content.join('<br\>')
+                //}
+                //else{
+                //    let new_one=new_node.cloneNode("1");
+                //    //new_one.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
+                //    news.children[0].style.backgroundImage="url("+ data[i].picture +")";
+                //    console.log(i+data[i].picture);
+                //    
+                //    new_one.children[0].children[0].innerHTML=data[i].id;
+                //    new_one.children[1].innerHTML=data[i].content;
+                //    main.append(new_one);
+                //}
+
+            }
+
+        }
+    })
+
+</script>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 2.2,
+        spaceBetween: 38,
+        freeMode: true,
+    });
+</script>
+
+</html>
