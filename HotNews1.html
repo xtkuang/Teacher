@@ -76,7 +76,7 @@
   <div class="main1">
     <div class="HotNews1">
       <div class="upOne">
-        <img src="./picture/00.webp" alt="">
+        <img src="./picture/news/practical/00.jpg" alt="">
         <div class="container">
           <div class="swiper mySwiper swiper1">
             <div class="swiper-wrapper" id="swiper1">
@@ -108,7 +108,7 @@
           </div>
 
         </div>
-        <img src="./picture/03.webp" alt="">
+        <img src="./picture/news/practical/01.jpg" alt="">
       </div>
     </div>
   </div>
@@ -165,15 +165,17 @@
     //alert("updataswiper")
     console.log(data)
     let cnt = 0
+    let page = 0
     let total = data.length / 6  //总页数  
     let container1 = document.querySelector("#swiper1")
-    let container2 = document.querySelector("#swiper1")
+    let container2 = document.querySelector("#swiper2")
     while (total > 0) {
-      //console.log("进入循环" + total)
+      console.log("进入循环" + total)
+      page++
       let ul = document.createElement("ul")
       for (let l = 0; l < 6 && cnt < data.length; l++) {
         let li = document.createElement("li")
-        li.id = data[cnt].id//id
+        li.id = cnt//id
         //console.log("id" + data[cnt].id)
         //console.log("content:" + data[cnt].content)
         li.innerHTML = data[cnt++].content//content
@@ -187,12 +189,12 @@
       swiper.className = "swiper-slide"
       swiper.appendChild(ul)
       //console.log(swiper)
-      if (total % 2 == 0) {
-        //console.log("swiper1")
+      if (page % 2 == 1) {
+        console.log("swiper1")
         container1.appendChild(swiper)
       }
       else {
-        //console.log("swiper2")
+        console.log("swiper2")
         container2.appendChild(swiper)
       }
       total--
