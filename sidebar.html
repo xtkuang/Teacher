@@ -140,10 +140,11 @@
     let times = 1
 
     //携带参数num时跳转到teacher页面
-    var urlParams = new URLSearchParams(window.location.search);
-    var num_start = urlParams.get("num");
+    var urlParams = new URLSearchParams(window.location.search)
+    var num_start = urlParams.get("num")
     if (num_start) {
-        document.querySelector('iframe').src="teacher.html?num="+num_start
+        document.querySelector('iframe').src = "teacher.html?num=" + num_start
+        loadPage(2, 0)
     }
 
 
