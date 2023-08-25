@@ -138,6 +138,15 @@
     let now_page = document.querySelector('.container')
     let pre_num = [0]
     let times = 1
+
+    //携带参数num时跳转到teacher页面
+    var urlParams = new URLSearchParams(window.location.search);
+    var num_start = urlParams.get("num");
+    if (num_start) {
+        document.querySelector('iframe').src="teacher.html?num="+num_start
+    }
+
+
     function loadPage (num, bool) {
 
         if (now_num != num) {

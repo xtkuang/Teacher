@@ -123,6 +123,7 @@
     </div>
 </body>
 <script>
+
     //名师介绍
     //教师添加删除2.修改num的数量
     num=10
@@ -138,11 +139,37 @@
     majorArray=[]
     imgArray=[]
     imgUrlArray=[]
+
+    //往前或往后移动数组指定位数  
+    function rotateArray(arr, shiftBy) {
+        const length = arr.length;
+
+        if (length === 0) {
+            return arr;
+        }
+
+        const shiftedArray = [];
+
+        for (let i = 0; i < length; i++) {
+            const newIndex = (i + shiftBy+length) % length;
+            shiftedArray[newIndex] = arr[i];
+        }
+
+        return shiftedArray;
+    }
+
+    var urlParams = new URLSearchParams(window.location.search);
+
     // 从localStorage中获取存储的数据,网页初始加载local数据
     function updateLocalTeacher(){
         if(localStorage.getItem("teacherResponse")!==null){
             var teacherData = JSON.parse(localStorage.getItem("teacherResponse"));
 
+            var num_start = urlParams.get("num");
+            console.log("num_start="+num_start);
+            var num_now=4-num_start
+            console.log("up="+num_now);
+            teacherData=rotateArray(teacherData,num_now)
             for(let i=0;i<num;i++){
                 nameArrayLocal[i]=teacherData[i].name
                 textArrayLocal[i]=teacherData[i].intro
@@ -179,6 +206,11 @@
         console.log(teacherResponse);
         // 存储数据到localStorage中
         localStorage.setItem('teacherResponse', JSON.stringify(teacherResponse));
+
+        var num_start = urlParams.get("num");
+        var num_now=4-num_start
+        console.log(num_now);
+        teacherResponse=rotateArray(teacherResponse,num_now)
 
         for(let i=0;i<num;i++){
             nameArray[i]=teacherResponse[i].name
