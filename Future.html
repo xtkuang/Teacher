@@ -121,7 +121,7 @@
         success: function (data) {
             num = ["一", "两", "三", "五", "五十", "一百五十", "一百"]
 
-            console.log(data)
+            
             document.querySelector(".shortVideo a").href = data[2].url
             document.querySelector(".shortVideo a img").src = "data:image/jpeg;base64," + data[2].picture_b64
             //document.querySelector(".shortVideo a img").src="url("+ data[1].picture +")";
@@ -130,9 +130,9 @@
             article = data[2].content
             const regex = /[一两三四五六七八十百]+/g
             const replacedStr = article.replace(regex, '<strong>$&</strong>')
-            //console.log()
-            console.log("article:")
-            console.log(article)
+            //
+            
+            
             article = replacedStr.split("\\n")
             document.querySelector("#vArt").innerHTML = article.join("<br\>")
         }
@@ -143,7 +143,7 @@
         url: "https://hdums.hdu.edu.cn/api/future_news",
         success: function (data) {
 
-            console.log(data)
+            
             let main = document.querySelector(".swiper-wrapper")
             let news = document.querySelector(".swiper-slide")
             let new_node = news.cloneNode("1")
@@ -161,7 +161,7 @@
                 //    let new_one=new_node.cloneNode("1");
                 //    //new_one.children[0].style.backgroundImage="url(data:image/jpeg;base64,"+ data[i].picture_b64+ ")";
                 //    news.children[0].style.backgroundImage="url("+ data[i].picture +")";
-                //    console.log(i+data[i].picture);
+                //    
                 //    
                 //    new_one.children[0].children[0].innerHTML=data[i].id;
                 //    new_one.children[1].innerHTML=data[i].content;

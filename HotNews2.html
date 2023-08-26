@@ -178,7 +178,7 @@
     //let data = window.location.search.substring(1).split('=')[1]
     let params = new URLSearchParams(window.location.search)
     let data = params.get('data')
-    console.log("loading")
+    
     return data
   }
 
@@ -207,7 +207,7 @@
         disabledClass: 'my-button-disabled',
       },
     })
-    console.log("swiperLoad end")
+    
   }
 
   let picture = {
@@ -220,25 +220,25 @@
     type: "get",
     url: "https://hdums.hdu.edu.cn/api/news",
     success: function (data) {
-      console.log("Here is HorNews2")
-      console.log(data)
+      
+      
       const swiper = document.querySelector("#swiper3")
       for (let i = 0; i < data.length; i++) {
-        console.log("进入循环" + i)
+        
         const container = document.createElement("div")
         container.className = "container"
         const p = document.createElement("p")
         const img = document.createElement("img")
         p.innerHTML = data[i].content
         img.src = "data:image/jpeg;base64," + data[i].picture_b64
-        console.log(p)
+        
         container.appendChild(p)
         const swiperslide = document.createElement("div")
         swiperslide.className = "swiper-slide"
         swiperslide.id = data[i].id
         swiperslide.appendChild(img)
         swiperslide.appendChild(container)
-        console.log(swiperslide)
+        
         swiper.appendChild(swiperslide)
         /*Object.defineProperty(picture, data[i].id, {
           value: data[i].picture,
@@ -247,12 +247,12 @@
           configurable: true
         })*/
         //picture.push(data[i].picture)
-        console.log(picture)
+        
       }
       //.update()
       //setTimeout(turnTo, 1)
       //pictureChange(load())
-      console.log("get end")
+      
       swiperLoad()
       //swiper3.update()
 

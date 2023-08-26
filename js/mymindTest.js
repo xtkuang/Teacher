@@ -7,7 +7,7 @@
 //     let regexp_1=/1\-\d/;
 //     for(let i=1;i<data.length;i++){
 //         if(data[i].id.test(regexp_1)){
-//             console.log(data[i].id+"匹配成功");
+//             
 //             jm.add_node(1,data[i].id,data[i].topic,{
 //                 "background-color":"#000daa",
 //             })
@@ -17,7 +17,7 @@
 //     }
     
 // }
-// console.log(mind.data);
+// 
 //jm.add_node(parent_node, node_id, topic, data, direction)
 
 
@@ -75,7 +75,7 @@ $.ajax({
             "data":[]
         }
         data[0][0]["topic"]=data[0][0].title;
-        console.log(data);
+        
         let array=data[0];
         mind.data=data[0];
         let jm = new jsMind(options);
@@ -88,9 +88,9 @@ $.ajax({
         //         let sonNode_num=select.children.length; 
         //         let Child_num=showTopic.children.length-1;
         //         let new_node=document.querySelector(".sonTopic").cloneNode("1");//克隆节点，"1"即包括子元素一起复制
-        //         console.log("sonNode_num:"+sonNode_num);
-        //         console.log("Child_num:"+Child_num);
-        //         console.log(showTopic.children);
+        //         
+        //         
+        //         
         //         //2.创建删除节点
         //         if(Child_num>=sonNode_num){
         //             if(sonNode_num==0) sonNode_num=1;//叶子节点
@@ -101,7 +101,7 @@ $.ajax({
         //             for(var i =Child_num+1;i<=sonNode_num;i++){
         //                 // let son=document.querySelector(".sonTopic");
         //                 let son=new_node;
-        //                 console.log(son);
+        //                 
         //                 son.children[0].children[1]="";//主题名称
         //                 son.children[1].children[1]="";//主题内容
         //                 showTopic.appendChild(son);
@@ -120,15 +120,15 @@ $.ajax({
         // }
         document.querySelector(".jsmind").onclick=()=>{
             let select=jm.get_selected_node();
-            console.dir(select);
+
             if(select){
                 let showTopic = document.querySelector('.showTopic');
                 let sonNode_num=select.children.length;   
                 let Child_num=showTopic.children.length-1;
                 let new_node=document.querySelector(".sonTopic").cloneNode("1");//克隆节点，"1"即包括子元素一起复制
-                console.log("sonNode_num:"+sonNode_num);
-                console.log("Child_num:"+Child_num);
-                console.log(showTopic.children);
+                
+                
+                
                 //2.创建删除节点
                 if(Child_num>=sonNode_num){
                     if(sonNode_num==0){
@@ -145,9 +145,9 @@ $.ajax({
                 }else{//增加元素 
                     for(let i =Child_num+1;i<=sonNode_num;i++){
                         let son=new_node.cloneNode("1");
-                        // console.log(son);
-                        // console.log(son.children[0]);
-                        // console.log(son.children[0].children[1]);
+                        // 
+                        // 
+                        // 
                         //son.children[0].children[1].innerText=i;//主题名称
                         //son.children[1].children[1].innerText=i;//主题内容
                         showTopic.appendChild(son);
@@ -158,8 +158,8 @@ $.ajax({
                     document.querySelector(".branchTopic").innerText=select.topic;//修改分支标题
                     for(let i=0;i<sonNode_num;i++){
                         let son_node=showTopic.children[i+1];
-                        console.log(son_node);
-                        console.log(select.children[i]);
+                        
+                        
                         son_node.children[0].children[1].innerText=select.children[i].topic;//主题名称
                         son_node.children[1].children[1].innerText=select.children[i].data.content;//主题名称
                     }
