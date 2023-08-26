@@ -117,7 +117,7 @@
             //your code
             //alert("这是mac系统");
         }
-        console.log(box)
+        
         box.innerHTML = "键盘输入" + promot + "全屏显示"
     }
     OSnow();
@@ -139,11 +139,12 @@
     let pre_num = [0]
     let times = 1
 
+
     //携带参数num时跳转到teacher页面
     var urlParams = new URLSearchParams(window.location.search)
-    var num_start = urlParams.get("num")
+    var num_start = parseInt(urlParams.get("num"))
+
     if (num_start) {
-        document.querySelector('iframe').src = "teacher.html?num=" + num_start
         loadPage(2, 0)
     }
 
@@ -159,7 +160,14 @@
             setTimeout((num) => {
                 now_page.classList.remove('page-out')
                 now_page.classList.add('page-in')
-                document.querySelector('iframe').src = page[num]
+                if(num_start){
+                    document.querySelector('iframe').src = "teacher.html?num="+num_start
+                }
+                else{
+                    document.querySelector('iframe').src = page[num]
+                }
+                // document.querySelector('iframe').src = page[num]
+
             }, 300, num)
             //alert(times)
             if (times === 1)
@@ -171,7 +179,7 @@
         let holder = document.querySelectorAll('.holder')
 
         for (var i = 0; i < 6; i++) {
-            console.log(i)
+            
             holder[i].classList.remove("selected")
         }
         holder[num].classList.add("selected")
@@ -179,9 +187,9 @@
     }
     function logout () {
         times++
-        console.log("logout")
-        console.log(now_num)
-        console.log(pre_num)
+        
+        
+        
         //alert(pre_num)
         let num = pre_num.length - times
         if (num > 0)

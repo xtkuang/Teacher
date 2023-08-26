@@ -165,11 +165,17 @@
         if(localStorage.getItem("teacherResponse")!==null){
             var teacherData = JSON.parse(localStorage.getItem("teacherResponse"));
 
-            var num_start = urlParams.get("num");
-            console.log("num_start="+num_start);
-            var num_now=4-num_start
-            console.log("up="+num_now);
+            var num_start = parseInt(urlParams.get("num"))
+            // 
+            var num_now=0
+            if(num_start)
+            {
+                num_now=4-num_start
+            }
+            //向右转num_now位   
+            // 
             teacherData=rotateArray(teacherData,num_now)
+
             for(let i=0;i<num;i++){
                 nameArrayLocal[i]=teacherData[i].name
                 textArrayLocal[i]=teacherData[i].intro
@@ -188,9 +194,7 @@
             $(".major span").html(majorArrayLocal[fix])
             $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"")
         }
-        else{
-            console.log("Local teacher无数据!");
-        }      
+   
     }
 
     updateLocalTeacher()
@@ -203,13 +207,18 @@
     xhr.onload = function() {
 
         var teacherResponse = xhr.response; // 获取服务器返回的数据
-        console.log(teacherResponse);
         // 存储数据到localStorage中
         localStorage.setItem('teacherResponse', JSON.stringify(teacherResponse));
 
-        var num_start = urlParams.get("num");
-        var num_now=4-num_start
-        console.log(num_now);
+        var num_start = parseInt(urlParams.get("num"))
+        // 
+        var num_now=0
+        if(num_start)
+        {
+            num_now=4-num_start
+        }
+        // 
+
         teacherResponse=rotateArray(teacherResponse,num_now)
 
         for(let i=0;i<num;i++){
@@ -225,12 +234,12 @@
 
         for(let i=1;i<=num;i++){
             if(imgUrlArray[i-1]!=imgUrlArrayLocal[i-1]){
-                console.log("teacher图片更新");
+                
                 imgUrlArrayLocal[i-1]=imgUrlArray[i-1]
                 imgArrayLocal[i-1]=imgArray[i-1]
                 $("[fix="+i+"] .photo").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[i-1]+"").hide().fadeIn()
                 if(i==teacher.attr("fix")){
-                    console.log("teacher左上角photo更新");
+                    
                     $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"").hide().fadeIn()
 
                 }
@@ -238,7 +247,7 @@
         }
 
         if(textArray[fix]!=textArrayLocal[fix]){
-            console.log("teacher文字更新");
+            
             textArrayLocal[fix]=textArray[fix]
             $(".boxtext span").html(textArrayLocal[fix]).hide().fadeIn()
         }
@@ -247,7 +256,7 @@
             $(".name span").html(nameArrayLocal[fix]).hide().fadeIn()
         }
         if(majorArray[fix]!=majorArrayLocal[fix]){
-            console.log("teacher职称更新");
+            
             majorArrayLocal[fix]=majorArray[fix]
             $(".major span").html(majorArrayLocal[fix]).hide().fadeIn()
         }
@@ -364,7 +373,7 @@
 
     function changePhoto(){
         let photoName=$("[index='3']").find(".photo").css("background-image")
-        // console.log(photoName);
+        // 
         $(".box .img").css("background-image",photoName)
     }
 

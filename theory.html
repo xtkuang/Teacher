@@ -239,7 +239,7 @@
 
         }
         else{
-            console.log("Local Comment无数据!");
+            
         }      
     }
 
@@ -251,7 +251,7 @@
             var commentData = JSON.parse(localStorage.getItem("commentResponsePractical"));
             lengthLocal_comment=commentData.length
             let swiper=$("#swiper3 .swiper-wrapper")
-            // console.log("长度"+commentData.length);
+            // 
             swiper.empty()
             for(let i=0;i<lengthLocal_comment;i++){
                 swiper.append(`
@@ -293,7 +293,7 @@
 
         }
         else{
-            console.log("Local Comment practical 无数据!");
+            
         }      
     }
 
@@ -308,7 +308,7 @@
             flag=1
         }
         var commentResponse = xhr.response; // 获取服务器返回的数据
-        console.log(commentResponse);
+        
         lengthLocal_comment=commentResponse.length
 
 
@@ -346,20 +346,20 @@
         //当前的与local里的比较
         for(let i=0;i<lengthLocal_comment;i++){
             // if(imgUrlArray_comment[i]!=imgUrlArrayLocal_comment[i]){
-                // console.log("comment图片更新");
+                // 
                 // imgUrlArrayLocal_comment[i]=imgUrlArray_comment[i]
             imgArrayLocal_comment[i]=imgArray_comment[i]
             $("#swiper3 [pos="+i+"] +.img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal_comment[i]+"").hide().fadeIn()
 
             // }
             if(textArray_comment[i]!=textArrayLocal_comment[i]){
-                console.log("comment文字更新");
+                
                 textArrayLocal_comment[i]=textArray_comment[i]
                 $("#swiper3 [pos="+i+"] label").html(textArrayLocal_comment[i]).hide().fadeIn()
 
             }
             if(urlArray_comment[i]!=urlArrayLocal_comment[i]){
-                console.log("comment链接更新");
+                
                 urlArrayLocal_comment[i]=urlArray_comment[i]
                 $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArrayLocal_comment[i]).attr("href",urlArrayLocal_comment[i]).hide().fadeIn()
 
@@ -379,7 +379,7 @@
     xhrp.onload = function() {
 
         var commentResponsePractical = xhrp.response; // 获取服务器返回的数据
-        console.log(commentResponsePractical);
+        
         // 存储数据到localStorage中
         lengthLocal_comment=commentResponsePractical.length
 
@@ -396,14 +396,14 @@
             imgArrayLocal_comment_practical[i]=imgArray_comment_practical[i]
 
             if(textArray_comment_practical[i]!=textArrayLocal_comment_practical[i]){
-                console.log("comment文字更新");
+                
                 textArrayLocal_comment_practical[i]=textArray_comment_practical[i]
                 // $("#swiper3 [pos="+i+"] label").html(textArrayLocal_comment_practical[i]).hide().fadeIn()
 
             }
 
             if(urlArray_comment_practical[i]!=urlArrayLocal_comment_practical[i]){
-                console.log("comment链接更新");
+                
                 urlArrayLocal_comment_practical[i]=urlArray_comment_practical[i]
                 // $("#swiper3 [pos="+i+"] a").text("网页链接: "+urlArrayLocal_comment_practical[i]).attr("href",urlArrayLocal_comment_practical[i]).hide().fadeIn()
 
@@ -458,7 +458,7 @@
             // $(".photoHolder .photo .img").css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal[fix]+"")
         }
         else{
-            console.log("Local news无数据!");
+            
         }      
     }
 
@@ -469,7 +469,7 @@
             var newsData = JSON.parse(localStorage.getItem("newsResponsePractical"));
             lengthLocal_news=newsData.length
             let swiper=$("#swiper2 .swiper-wrapper")
-            // console.log("长度"+commentData.length);
+            // 
             swiper.empty()
             for(let i=0;i<lengthLocal_news;i++){
                 swiper.append(`
@@ -499,7 +499,7 @@
            
         }
         else{
-            console.log("Local news无数据!");
+            
         }      
     }
 
@@ -513,8 +513,8 @@
             flag=1
         }
         var newsResponse = xhr1.response; // 获取服务器返回的数据
-        // console.log("newsResponse");
-        console.log(newsResponse);
+        // 
+        
 
         lengthLocal_news=newsResponse.length
 
@@ -548,7 +548,7 @@
         //当前的与local里的比较
         for(let i=0;i<lengthLocal_news;i++){
             // if(imgUrlArray_news[i]!=imgUrlArrayLocal_news[i]){
-            //     console.log("news图片更新");
+            //     
             //     imgUrlArrayLocal_news[i]=imgUrlArray_news[i]
             imgArrayLocal_news[i]=imgArray_news[i]
 
@@ -556,7 +556,7 @@
 
             
             if(textArray_news[i]!=textArrayLocal_news[i]){
-                console.log("news文字更新");
+                
                 textArrayLocal_news[i]=textArray_news[i]
                 $("#swiper2 [pos="+i+"] label").html(textArrayLocal_news[i]).hide().fadeIn()
 
@@ -579,7 +579,7 @@
     xhr1p.onload = function() {
         var newsResponsePractical = xhr1p.response; // 获取服务器返回的数据
 
-        console.log(newsResponsePractical);
+        
 
         lengthLocal_news=newsResponsePractical.length
 
@@ -593,13 +593,13 @@
         //当前的与local里的比较
         for(let i=0;i<lengthLocal_news;i++){
             // if(imgUrlArray_news_practical[i]!=imgUrlArrayLocal_news_practical[i]){
-            //     console.log("news图片更新");
+            //     
             //     imgUrlArrayLocal_news_practical[i]=imgUrlArray_news_practical[i]
             imgArrayLocal_news_practical[i]=imgArray_news_practical[i]
                 // $("#swiper2 [pos="+i+"]").siblings().css("background-image","url(data:image/jpeg;base64,"+imgArrayLocal_news[i]+"").hide().fadeIn()
             // }
             if(textArray_news_practical[i]!=textArrayLocal_news_practical[i]){
-                console.log("news文字更新");
+                
                 textArrayLocal_news_practical[i]=textArray_news_practical[i]
                 // $("#swiper2 [pos="+i+"] label").html(textArrayLocal_comment[i]).hide().fadeIn()
 
@@ -649,7 +649,7 @@
             
         }
         else{
-            console.log("Local video无数据!");
+            
         }      
     }
 
@@ -685,7 +685,7 @@
             
         }
         else{
-            console.log("Local video无数据!");
+            
         }      
     }
 
@@ -698,7 +698,7 @@
             flag=1
         }
         var videoResponse = xhr2.response; // 获取服务器返回的数据
-        console.log(videoResponse);
+        
 
         let length=videoResponse.length
         if(flag==1){
@@ -749,7 +749,7 @@
 
         for(let i=0;i<length;i++){
             if(textArray_video[i]!==textArrayLocal_video[i]){
-                console.log("video文字更新")
+                
                 textArrayLocal_video[i]=textArray_video[i]
             }
         }
@@ -769,7 +769,7 @@
     xhr2p.onload = function() {
 
         var videoResponsePractical = xhr2p.response; // 获取服务器返回的数据
-        console.log(videoResponsePractical);
+        
 
         let length=videoResponsePractical.length
     
@@ -786,11 +786,11 @@
         }
         for(let i=0;i<length;i++){
             if(textArray_video_practical[i]!=textArrayLocal_video_practical[i]){
-                console.log("video文字更新");
+                
                 textArrayLocal_video_practical[i]=textArray_video_practical[i]
             }
             if(urlArray_video_practical[i]!=urlArrayLocal_video_practical[i]){
-                console.log("video url更新");
+                
                 urlArrayLocal_video_practical[i]=urlArray_video_practical[i]
             }
         }
