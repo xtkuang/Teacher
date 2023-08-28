@@ -1,6 +1,6 @@
     //名师介绍
     //教师添加删除2.修改num的数量
-    num=11
+    num=10
     //预加载本地数据
     nameArrayLocal=[]
     textArrayLocal=[]
