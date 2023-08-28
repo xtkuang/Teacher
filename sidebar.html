@@ -160,7 +160,7 @@
             setTimeout((num) => {
                 now_page.classList.remove('page-out')
                 now_page.classList.add('page-in')
-                if(num_start){
+                if(num_start&&num===2){
                     document.querySelector('iframe').src = "teacher.html?num="+num_start
                 }
                 else{
