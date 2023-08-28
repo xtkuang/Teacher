@@ -169,8 +169,8 @@
 
     // 从localStorage中获取存储的数据,网页初始加载local数据
     function updateLocalTeacher(){
-        if(localStorage.getItem("teacherResponse")!==null){
-            var teacherData = JSON.parse(localStorage.getItem("teacherResponse"));
+        var teacherData = JSON.parse(localStorage.getItem("teacherResponse"));
+        if(teacherData!==null &&num==teacherData.length){
 
             var num_start = parseInt(urlParams.get("num"))
             // 
