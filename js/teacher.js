@@ -1,7 +1,34 @@
     //名师介绍
-    //教师添加删除2.修改num的数量
-    num=12
-    //预加载本地数据
+    //教师添加删除2.修改num的数量(大于等于6不改)
+    var num=12
+
+    num = (function () {
+        let result;
+        $.ajax({
+            type: 'get',
+            url: 'https://hdums.hdu.edu.cn/gw/api/teacher/1/0',
+            dataType: 'json',
+            async:false, 
+            success: (response) => {
+                result = response.data.total;
+            }
+        })
+        return result;
+    })();
+
+    if(num>6){
+        for (let i = 7; i <= num; i++) {
+            $(".ellipse3").append(`
+                <div class="orbit" >
+                    <div class="circle circle-left1"  index=`+i+` fix=`+i+`>
+                        <div class="photo" ></div>
+                        <div class="bac-circle"></div>
+                    </div>
+                </div>   
+            `)
+        }
+    }
+
     nameArrayLocal=[]
     textArrayLocal=[]
     majorArrayLocal=[]
